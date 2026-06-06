@@ -1,0 +1,2620 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PSYCHE — Sistema Vocacional de Alta Precisión</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   PSYCHE VOCACIONAL — DESIGN SYSTEM
+═══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --ink:#0c0c10;
+  --ink2:#1a1a22;
+  --ink3:#252530;
+  --glass:rgba(255,255,255,0.04);
+  --glass2:rgba(255,255,255,0.07);
+  --line:rgba(255,255,255,0.08);
+  --line2:rgba(255,255,255,0.14);
+  --white:#f4f3ef;
+  --muted:#7a7a8c;
+  --muted2:#5a5a6e;
+  --lime:#b8ff57;
+  --lime2:#d4ff8a;
+  --cyan:#57ffe0;
+  --rose:#ff5780;
+  --amber:#ffb830;
+  --violet:#9b6fff;
+  --blue:#4db8ff;
+  --r8:8px;
+  --r16:16px;
+  --r24:24px;
+}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--ink);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+
+/* ── SCREENS ── */
+.screen{display:none;min-height:100vh;}
+.screen.active{display:block;}
+
+/* ── SHARED COMPONENTS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  border:none;cursor:pointer;font-family:'DM Sans',sans-serif;
+  font-weight:500;transition:all 0.2s;
+}
+.btn-primary{
+  background:var(--lime);color:var(--ink);
+  border-radius:var(--r8);padding:14px 28px;font-size:0.95rem;font-weight:600;
+}
+.btn-primary:hover{background:var(--lime2);transform:translateY(-1px);}
+.btn-ghost{
+  background:var(--glass);color:var(--white);
+  border:1px solid var(--line2);border-radius:var(--r8);
+  padding:12px 22px;font-size:0.9rem;
+}
+.btn-ghost:hover{background:var(--glass2);}
+
+.tag{
+  display:inline-block;padding:4px 12px;border-radius:999px;
+  font-size:0.7rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;
+}
+
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:999px;padding:5px 14px;font-size:0.75rem;color:var(--muted);
+}
+
+/* ══════════════════════════════════
+   SCREEN 1 — LANDING
+══════════════════════════════════ */
+#s-land{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+
+/* Grid background */
+.grid-bg{
+  position:fixed;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;z-index:0;
+}
+.grid-vignette{
+  position:fixed;inset:0;
+  background:radial-gradient(ellipse at center, transparent 30%, var(--ink) 80%);
+  pointer-events:none;z-index:1;
+}
+
+.land-nav{
+  position:relative;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 40px;
+  border-bottom:1px solid var(--line);
+}
+.logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.8rem;letter-spacing:0.12em;
+  color:var(--white);
+}
+.logo span{color:var(--lime);}
+
+.land-hero{
+  position:relative;z-index:10;
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:80px 24px 60px;
+}
+
+.land-eyebrow{
+  display:flex;align-items:center;gap:8px;
+  margin-bottom:32px;
+}
+.eye-dot{width:6px;height:6px;border-radius:50%;background:var(--lime);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0.3;}}
+.eye-text{font-size:0.75rem;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--lime);}
+
+.land-h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(3.5rem,10vw,7rem);
+  letter-spacing:0.04em;
+  line-height:0.95;
+  margin-bottom:28px;
+}
+.land-h1 .accent{
+  display:block;
+  -webkit-text-stroke:1px var(--lime);
+  color:transparent;
+}
+
+.land-sub{
+  font-size:clamp(1rem,2vw,1.15rem);
+  color:var(--muted);
+  max-width:560px;
+  margin:0 auto 48px;
+  font-weight:300;
+  line-height:1.75;
+}
+
+.land-chips{
+  display:flex;gap:10px;justify-content:center;
+  flex-wrap:wrap;margin-bottom:48px;
+}
+
+.version-cards{
+  display:flex;gap:16px;justify-content:center;
+  flex-wrap:wrap;margin-bottom:48px;
+  width:100%;max-width:780px;
+}
+.vc{
+  flex:1;min-width:200px;max-width:240px;
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:24px 20px;
+  cursor:pointer;transition:all 0.25s;text-align:left;
+  position:relative;overflow:hidden;
+}
+.vc::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(184,255,87,0.06) 0%,transparent 60%);
+  opacity:0;transition:opacity 0.25s;
+}
+.vc:hover::before,.vc.active::before{opacity:1;}
+.vc:hover,.vc.active{border-color:var(--lime);transform:translateY(-3px);}
+.vc.active{background:rgba(184,255,87,0.08);}
+.vc-icon{font-size:1.8rem;margin-bottom:12px;}
+.vc-name{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.08em;margin-bottom:4px;}
+.vc-q{font-size:0.78rem;color:var(--lime);font-weight:600;margin-bottom:2px;}
+.vc-t{font-size:0.72rem;color:var(--muted);}
+
+.land-cta{
+  display:flex;flex-direction:column;align-items:center;gap:16px;
+}
+.land-fine{font-size:0.75rem;color:var(--muted2);}
+
+.land-stats{
+  position:relative;z-index:10;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:0;
+  border-top:1px solid var(--line);
+  margin-top:auto;
+}
+.stat-item{
+  padding:28px 20px;text-align:center;
+  border-right:1px solid var(--line);
+}
+.stat-item:last-child{border-right:none;}
+.stat-n{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.2rem;letter-spacing:0.04em;color:var(--lime);
+}
+.stat-l{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;}
+
+/* ══════════════════════════════════
+   SCREEN 2 — ONBOARDING
+══════════════════════════════════ */
+#s-onboard{background:var(--ink);}
+.onboard-wrap{
+  max-width:560px;margin:0 auto;padding:80px 24px;
+}
+.on-step{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  color:var(--lime);margin-bottom:40px;
+}
+.on-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2.4rem;letter-spacing:0.06em;margin-bottom:8px;
+}
+.on-sub{font-size:0.9rem;color:var(--muted);margin-bottom:40px;line-height:1.65;}
+
+.form-group{margin-bottom:24px;}
+.form-label{
+  display:block;font-size:0.72rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--muted);margin-bottom:10px;
+}
+.form-input{
+  width:100%;
+  background:var(--glass);border:1px solid var(--line2);
+  border-radius:var(--r8);padding:14px 18px;
+  color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.95rem;
+  outline:none;transition:border 0.2s;
+}
+.form-input:focus{border-color:var(--lime);}
+.form-input::placeholder{color:var(--muted2);}
+select.form-input option{background:var(--ink2);}
+
+.on-info{
+  background:rgba(184,255,87,0.06);border:1px solid rgba(184,255,87,0.2);
+  border-radius:var(--r8);padding:16px 18px;margin-bottom:32px;
+  font-size:0.84rem;color:var(--muted);line-height:1.65;
+}
+.on-info strong{color:var(--lime);}
+
+/* ══════════════════════════════════
+   SCREEN 3 — TEST
+══════════════════════════════════ */
+#s-test{background:var(--ink);}
+
+.test-topbar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(12,12,16,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  padding:0 32px;
+}
+.test-topbar-inner{
+  display:flex;align-items:center;gap:20px;
+  height:60px;max-width:820px;margin:0 auto;
+}
+.tb-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:1.2rem;letter-spacing:0.1em;color:var(--muted2);
+  flex-shrink:0;
+}
+.tb-prog-wrap{flex:1;}
+.tb-prog-labels{
+  display:flex;justify-content:space-between;
+  font-size:0.68rem;color:var(--muted2);
+  font-family:'DM Mono',monospace;margin-bottom:6px;
+}
+.tb-prog-bg{height:2px;background:var(--line);border-radius:1px;}
+.tb-prog-fill{
+  height:2px;border-radius:1px;
+  background:linear-gradient(90deg,var(--lime),var(--cyan));
+  transition:width 0.5s cubic-bezier(.22,1,.36,1);
+}
+.tb-section{
+  flex-shrink:0;font-size:0.72rem;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);
+  font-family:'DM Mono',monospace;
+}
+
+.test-body{max-width:820px;margin:0 auto;padding:48px 24px 120px;}
+
+.module-header{
+  margin-bottom:40px;padding:28px 32px;
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r24);
+  display:flex;align-items:center;gap:20px;
+}
+.mod-icon{
+  font-size:2rem;flex-shrink:0;
+  width:60px;height:60px;border-radius:var(--r16);
+  background:var(--glass2);display:flex;align-items:center;justify-content:center;
+}
+.mod-meta{}
+.mod-label{
+  font-size:0.65rem;font-weight:600;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--lime);font-family:'DM Mono',monospace;
+  margin-bottom:4px;
+}
+.mod-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.06em;margin-bottom:4px;}
+.mod-desc{font-size:0.82rem;color:var(--muted);}
+
+.q-block{
+  margin-bottom:20px;
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:28px;
+  transition:border-color 0.2s;
+}
+.q-block.answered{border-color:rgba(184,255,87,0.25);}
+
+.q-meta{
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.q-num{
+  font-family:'DM Mono',monospace;font-size:0.68rem;
+  color:var(--muted2);
+}
+.q-type-pill{
+  font-size:0.62rem;font-weight:600;letter-spacing:0.08em;
+  text-transform:uppercase;padding:3px 10px;border-radius:999px;
+}
+.qt-likert{background:rgba(77,184,255,0.15);color:var(--blue);}
+.qt-choice{background:rgba(184,255,87,0.12);color:var(--lime);}
+.qt-scenario{background:rgba(255,184,48,0.15);color:var(--amber);}
+.qt-reflection{background:rgba(155,111,255,0.15);color:var(--violet);}
+.qt-ranking{background:rgba(87,255,224,0.12);color:var(--cyan);}
+.qt-dilemma{background:rgba(255,87,128,0.15);color:var(--rose);}
+
+.q-text{
+  font-size:1rem;line-height:1.65;color:var(--white);
+  margin-bottom:20px;font-weight:400;
+}
+.q-text em{color:var(--muted);font-style:normal;font-size:0.88rem;}
+
+/* LIKERT */
+.likert-scale{display:flex;gap:0;}
+.lk-btn{
+  flex:1;border:1px solid var(--line);
+  background:var(--glass);color:var(--muted);
+  padding:12px 8px;cursor:pointer;
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.05em;
+  transition:all 0.15s;text-align:center;
+}
+.lk-btn:first-child{border-radius:var(--r8) 0 0 var(--r8);}
+.lk-btn:last-child{border-radius:0 var(--r8) var(--r8) 0;}
+.lk-btn:not(:first-child){border-left:none;}
+.lk-btn:hover{background:rgba(184,255,87,0.1);color:var(--lime);}
+.lk-btn.sel{background:var(--lime);color:var(--ink);border-color:var(--lime);}
+.lk-btn.sel:hover{background:var(--lime2);}
+.likert-labels{
+  display:flex;justify-content:space-between;
+  font-size:0.65rem;color:var(--muted2);margin-top:8px;padding:0 2px;
+}
+
+/* CHOICES */
+.choices-list{display:flex;flex-direction:column;gap:8px;}
+.ch{
+  display:flex;align-items:flex-start;gap:14px;
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r8);padding:14px 16px;
+  cursor:pointer;transition:all 0.15s;
+}
+.ch:hover{border-color:rgba(184,255,87,0.35);background:rgba(184,255,87,0.04);}
+.ch.sel{border-color:var(--lime);background:rgba(184,255,87,0.08);}
+.ch-letter{
+  min-width:26px;height:26px;border-radius:6px;
+  background:var(--glass2);color:var(--muted);
+  font-family:'DM Mono',monospace;font-size:0.72rem;font-weight:500;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  margin-top:1px;transition:all 0.15s;
+}
+.ch.sel .ch-letter{background:var(--lime);color:var(--ink);}
+.ch-text{font-size:0.9rem;line-height:1.55;color:var(--white);}
+
+/* RANKING */
+.rank-list{display:flex;flex-direction:column;gap:8px;}
+.rk-item{
+  display:flex;align-items:center;gap:14px;
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r8);padding:12px 16px;
+  cursor:grab;user-select:none;transition:all 0.15s;
+}
+.rk-item.dragging{opacity:0.5;border-color:var(--lime);}
+.rk-n{
+  font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--lime);
+  min-width:20px;flex-shrink:0;
+}
+.rk-grip{color:var(--muted2);font-size:0.9rem;cursor:grab;}
+.rk-text{font-size:0.88rem;}
+
+/* DILEMMA */
+.dilemma-pair{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.dl{
+  background:var(--glass);border:2px solid var(--line);
+  border-radius:var(--r16);padding:20px;cursor:pointer;
+  transition:all 0.2s;text-align:center;
+}
+.dl:hover{border-color:rgba(184,255,87,0.4);}
+.dl.sel-a{border-color:var(--lime);background:rgba(184,255,87,0.08);}
+.dl.sel-b{border-color:var(--cyan);background:rgba(87,255,224,0.08);}
+.dl-icon{font-size:1.8rem;margin-bottom:10px;}
+.dl-text{font-size:0.88rem;line-height:1.55;}
+.dl-vs{
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',sans-serif;font-size:0.9rem;
+  letter-spacing:0.1em;color:var(--muted2);
+}
+
+/* NAV */
+.test-nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(12,12,16,0.95);backdrop-filter:blur(16px);
+  border-top:1px solid var(--line);
+  padding:16px 32px;
+}
+.test-nav-inner{
+  max-width:820px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.tnav-info{font-size:0.75rem;color:var(--muted2);font-family:'DM Mono',monospace;}
+
+/* ══════════════════════════════════
+   SCREEN 4 — LOADING/ANALYSIS
+══════════════════════════════════ */
+#s-load{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:100vh;padding:40px 24px;text-align:center;
+}
+.load-ring{
+  width:80px;height:80px;
+  border:2px solid var(--line);
+  border-top-color:var(--lime);
+  border-radius:50%;
+  animation:spin 1s linear infinite;
+  margin:0 auto 32px;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.load-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:2rem;letter-spacing:0.08em;margin-bottom:8px;
+}
+.load-sub{font-size:0.85rem;color:var(--muted);margin-bottom:40px;}
+.load-steps{display:flex;flex-direction:column;gap:10px;max-width:360px;margin:0 auto;}
+.ls{display:flex;align-items:center;gap:12px;font-size:0.82rem;color:var(--muted2);}
+.ls.done{color:var(--lime);}
+.ls.active{color:var(--white);}
+.ls-dot{width:8px;height:8px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.ls.active .ls-dot{animation:pulse2 1s infinite;}
+@keyframes pulse2{0%,100%{transform:scale(1);}50%{transform:scale(1.5);}}
+
+/* ══════════════════════════════════
+   SCREEN 5 — RESULTS
+══════════════════════════════════ */
+#s-results{background:var(--ink);}
+
+.res-topbar{
+  background:var(--ink);border-bottom:1px solid var(--line);
+  padding:20px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+.res-body{max-width:900px;margin:0 auto;padding:48px 24px 100px;}
+
+/* HERO RESULT */
+.res-hero{
+  position:relative;overflow:hidden;
+  background:var(--ink2);border:1px solid var(--line2);
+  border-radius:var(--r24);padding:48px;margin-bottom:28px;
+}
+.res-hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,255,87,0.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+.rh-overline{
+  font-family:'DM Mono',monospace;font-size:0.68rem;
+  font-weight:500;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--lime);margin-bottom:16px;
+}
+.rh-profile-name{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(2.2rem,5vw,3.5rem);
+  letter-spacing:0.04em;line-height:1;
+  margin-bottom:12px;
+}
+.rh-tagline{font-size:1.05rem;color:var(--muted);margin-bottom:28px;font-weight:300;}
+.rh-desc{font-size:0.95rem;line-height:1.75;color:rgba(244,243,239,0.85);max-width:600px;margin-bottom:32px;}
+.rh-traits{display:flex;gap:8px;flex-wrap:wrap;}
+.rh-trait{
+  padding:6px 16px;border-radius:999px;font-size:0.75rem;font-weight:600;
+  border:1px solid;
+}
+
+/* METRICS ROW */
+.metrics-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:12px;margin-bottom:28px;
+}
+.metric-card{
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:20px;
+}
+.mc-label{font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:8px;}
+.mc-value{
+  font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:0.04em;
+  margin-bottom:4px;
+}
+.mc-sub{font-size:0.7rem;color:var(--muted);}
+.mc-bar{height:2px;background:var(--line);border-radius:1px;margin-top:12px;}
+.mc-fill{height:2px;border-radius:1px;transition:width 1s cubic-bezier(.22,1,.36,1);}
+
+/* SECTION HEADING */
+.sec-heading{
+  display:flex;align-items:center;gap:14px;
+  margin-bottom:20px;margin-top:36px;
+}
+.sec-heading::before{
+  content:'';display:block;width:3px;height:22px;
+  background:linear-gradient(var(--lime),var(--cyan));border-radius:2px;flex-shrink:0;
+}
+.sec-h{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;}
+
+/* CAREERS */
+.careers-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:14px;margin-bottom:28px;
+}
+.career-card{
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:22px 18px;
+  transition:all 0.2s;
+}
+.career-card.top-pick{
+  border-color:rgba(184,255,87,0.35);
+  background:rgba(184,255,87,0.05);
+}
+.career-card:hover{transform:translateY(-2px);border-color:var(--line2);}
+.cc-icon{font-size:1.6rem;margin-bottom:12px;}
+.cc-name{font-size:0.9rem;font-weight:600;margin-bottom:6px;line-height:1.3;}
+.cc-pct{
+  font-family:'DM Mono',monospace;font-size:0.75rem;
+  margin-bottom:10px;
+}
+.cc-bar{height:3px;background:var(--line);border-radius:2px;margin-bottom:10px;}
+.cc-bar-fill{height:3px;border-radius:2px;}
+.cc-why{font-size:0.72rem;color:var(--muted);line-height:1.55;}
+
+/* RADAR CHART */
+.radar-wrap{
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:32px;margin-bottom:28px;
+}
+.radar-title{font-size:0.7rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);margin-bottom:20px;}
+
+/* INTEL GRID */
+.intel-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:10px;margin-bottom:28px;
+}
+.intel-card{
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:18px;text-align:center;
+}
+.ic-icon{font-size:1.4rem;margin-bottom:8px;}
+.ic-name{font-size:0.7rem;color:var(--muted);margin-bottom:8px;line-height:1.4;}
+.ic-score{
+  font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;margin-bottom:6px;
+}
+.ic-bar{height:2px;background:var(--line);border-radius:1px;margin:0 auto;}
+.ic-fill{height:2px;border-radius:1px;transition:width 1.2s cubic-bezier(.22,1,.36,1);}
+
+/* DEEP ANALYSIS CARDS */
+.analysis-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  margin-bottom:28px;
+}
+@media(max-width:600px){.analysis-grid{grid-template-columns:1fr;}}
+.anl-card{
+  background:var(--glass);border:1px solid var(--line);
+  border-radius:var(--r16);padding:24px;
+}
+.anl-card.full{grid-column:1/-1;}
+.anl-type{
+  font-size:0.62rem;font-weight:600;letter-spacing:0.1em;
+  text-transform:uppercase;margin-bottom:12px;
+}
+.anl-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.1rem;
+  letter-spacing:0.06em;margin-bottom:12px;
+}
+.anl-body{font-size:0.85rem;color:var(--muted);line-height:1.7;}
+.anl-body strong{color:var(--white);}
+
+.list-ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.list-ul li{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:0.84rem;color:var(--muted);line-height:1.5;
+}
+.li-dot{
+  width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:7px;
+}
+
+/* RISK METER */
+.risk-row{display:flex;flex-direction:column;gap:12px;margin-bottom:8px;}
+.risk-item{display:flex;align-items:center;gap:16px;}
+.risk-label{font-size:0.78rem;color:var(--muted);min-width:150px;}
+.risk-bar-bg{flex:1;height:4px;background:var(--line);border-radius:2px;}
+.risk-fill{height:4px;border-radius:2px;transition:width 1s;}
+.risk-pct{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);min-width:36px;text-align:right;}
+
+/* ENVIRONMENT CARDS */
+.env-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:8px;}
+.env-chip{
+  padding:8px 18px;border-radius:999px;font-size:0.78rem;font-weight:500;
+  border:1px solid;transition:all 0.2s;
+}
+
+/* RESTART */
+.res-footer{
+  text-align:center;padding-top:32px;border-top:1px solid var(--line);margin-top:20px;
+}
+.btn-restart{
+  background:var(--glass);border:1px solid var(--line2);color:var(--muted);
+  border-radius:var(--r8);padding:12px 24px;font-size:0.85rem;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;
+}
+.btn-restart:hover{border-color:var(--line2);color:var(--white);}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--ink);}
+::-webkit-scrollbar-thumb{background:var(--line2);border-radius:2px;}
+
+/* AI STREAM */
+.ai-stream{
+  background:var(--ink2);border:1px solid rgba(184,255,87,0.2);
+  border-radius:var(--r16);padding:28px;
+  font-size:0.88rem;line-height:1.75;color:rgba(244,243,239,0.9);
+  white-space:pre-wrap;
+}
+.ai-cursor{
+  display:inline-block;width:2px;height:14px;
+  background:var(--lime);animation:blink2 0.7s infinite;
+  vertical-align:middle;margin-left:2px;
+}
+@keyframes blink2{0%,100%{opacity:1;}50%{opacity:0;}}
+
+@media(max-width:640px){
+  .land-nav{padding:20px 20px;}
+  .land-hero{padding:60px 20px 40px;}
+  .dilemma-pair{grid-template-columns:1fr;}
+  .res-hero{padding:32px 24px;}
+  .analysis-grid{grid-template-columns:1fr;}
+  .res-body{padding:32px 16px 80px;}
+  .test-body{padding:32px 16px 100px;}
+  .land-stats{grid-template-columns:repeat(2,1fr);}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="grid-vignette"></div>
+
+<!-- ══════════════════════════════════
+     SCREEN 1 — LANDING
+══════════════════════════════════ -->
+<div id="s-land" class="screen active">
+  <nav class="land-nav">
+    <div class="logo">PSY<span>CHE</span></div>
+    <div class="chip">Sistema Vocacional · v3.0</div>
+  </nav>
+
+  <div class="land-hero">
+    <div class="land-eyebrow">
+      <div class="eye-dot"></div>
+      <div class="eye-text">Análisis psicológico de alta precisión</div>
+    </div>
+
+    <h1 class="land-h1">
+      DESCUBRE<br>
+      <span class="accent">QUIÉN ERES</span>
+    </h1>
+
+    <p class="land-sub">
+      Un sistema vocacional que va más allá de las carreras. Analiza tu personalidad profunda, patrones mentales, talentos ocultos y potencial profesional con precisión clínica.
+    </p>
+
+    <div class="land-chips">
+      <div class="chip">🧠 Psicometría avanzada</div>
+      <div class="chip">⚡ Análisis con IA</div>
+      <div class="chip">🎯 30 dimensiones</div>
+      <div class="chip">📊 Informe premium</div>
+    </div>
+
+    <div class="version-cards">
+      <div class="vc active" onclick="selectVer('rapido',this)">
+        <div class="vc-icon">⚡</div>
+        <div class="vc-name">Rápido</div>
+        <div class="vc-q">40 preguntas</div>
+        <div class="vc-t">~15 minutos</div>
+      </div>
+      <div class="vc" onclick="selectVer('estandar',this)">
+        <div class="vc-icon">🎯</div>
+        <div class="vc-name">Estándar</div>
+        <div class="vc-q">100 preguntas</div>
+        <div class="vc-t">~30 minutos</div>
+      </div>
+      <div class="vc" onclick="selectVer('profundo',this)">
+        <div class="vc-icon">🔬</div>
+        <div class="vc-name">Profundo</div>
+        <div class="vc-q">160 preguntas</div>
+        <div class="vc-t">~50 minutos</div>
+      </div>
+    </div>
+
+    <div class="land-cta">
+      <button class="btn btn-primary" onclick="showScreen('s-onboard')">
+        Comenzar evaluación
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <div class="land-fine">Confidencial · Sin cuenta requerida · Resultados instantáneos</div>
+    </div>
+  </div>
+
+  <div class="land-stats">
+    <div class="stat-item">
+      <div class="stat-n">160+</div>
+      <div class="stat-l">Preguntas diseñadas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">30</div>
+      <div class="stat-l">Dimensiones psicológicas</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">24+</div>
+      <div class="stat-l">Áreas de carrera</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">12</div>
+      <div class="stat-l">Perfiles vocacionales</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-n">IA</div>
+      <div class="stat-l">Análisis profundo</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 2 — ONBOARDING
+══════════════════════════════════ -->
+<div id="s-onboard" class="screen">
+  <div class="onboard-wrap">
+    <div class="on-step">
+      <span>01</span><span style="color:var(--muted2)">/</span><span style="color:var(--muted2)">02</span>
+      — Información inicial
+    </div>
+    <h2 class="on-title">ANTES DE COMENZAR</h2>
+    <p class="on-sub">Esta evaluación está diseñada para conocerte profundamente. No hay respuestas correctas ni incorrectas — solo respuestas honestas.</p>
+
+    <div class="form-group">
+      <label class="form-label">¿Cómo te llamas?</label>
+      <input class="form-input" type="text" id="userName" placeholder="Tu nombre o apodo...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Tu edad</label>
+      <input class="form-input" type="number" id="userAge" placeholder="Ej: 16" min="13" max="22">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Grado o año escolar</label>
+      <select class="form-input" id="userGrade">
+        <option value="">Selecciona...</option>
+        <option>1° de secundaria</option>
+        <option>2° de secundaria</option>
+        <option>3° de secundaria</option>
+        <option>4° de secundaria</option>
+        <option>5° de secundaria</option>
+        <option>Recién egresado de secundaria</option>
+        <option>Universitario (primer año)</option>
+      </select>
+    </div>
+
+    <div class="on-info">
+      <strong>🔒 Cómo funciona:</strong> Tus respuestas se analizan con un motor psicométrico de 30 dimensiones. El sistema detectará patrones que tú mismo podrías no ver. Al final recibirás un informe profundo con tu perfil de personalidad, carreras compatibles, fortalezas, riesgos y recomendaciones personalizadas.
+    </div>
+
+    <div style="display:flex;gap:14px;">
+      <button class="btn btn-ghost" onclick="showScreen('s-land')">← Atrás</button>
+      <button class="btn btn-primary" style="flex:1;justify-content:center;" onclick="startTest()">
+        Iniciar evaluación →
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 3 — TEST
+══════════════════════════════════ -->
+<div id="s-test" class="screen">
+  <div class="test-topbar">
+    <div class="test-topbar-inner">
+      <div class="tb-logo">PSYCHE</div>
+      <div class="tb-prog-wrap">
+        <div class="tb-prog-labels">
+          <span id="sectionLabel">Módulo 1</span>
+          <span id="progCount">0 / 0</span>
+        </div>
+        <div class="tb-prog-bg">
+          <div class="tb-prog-fill" id="progFill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="tb-section" id="tbSection">—</div>
+    </div>
+  </div>
+
+  <div class="test-body" id="testBody"></div>
+
+  <div class="test-nav">
+    <div class="test-nav-inner">
+      <div class="tnav-info" id="tnavInfo">Módulo 1 de 15</div>
+      <div style="display:flex;gap:10px;">
+        <button class="btn btn-ghost" id="btnPrev" onclick="prevModule()">← Anterior</button>
+        <button class="btn btn-primary" id="btnNext" onclick="nextModule()">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 4 — LOADING
+══════════════════════════════════ -->
+<div id="s-load" class="screen">
+  <div class="load-ring"></div>
+  <div class="load-title">ANALIZANDO TU PERFIL</div>
+  <div class="load-sub">Procesando más de 240 indicadores psicológicos</div>
+  <div class="load-steps">
+    <div class="ls active" id="ls0"><div class="ls-dot"></div>Calculando dimensiones de personalidad</div>
+    <div class="ls" id="ls1"><div class="ls-dot"></div>Evaluando inteligencias múltiples</div>
+    <div class="ls" id="ls2"><div class="ls-dot"></div>Detectando patrones emocionales</div>
+    <div class="ls" id="ls3"><div class="ls-dot"></div>Mapeando compatibilidad vocacional</div>
+    <div class="ls" id="ls4"><div class="ls-dot"></div>Identificando talentos ocultos</div>
+    <div class="ls" id="ls5"><div class="ls-dot"></div>Generando análisis psicológico profundo con IA</div>
+    <div class="ls" id="ls6"><div class="ls-dot"></div>Preparando informe personalizado</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     SCREEN 5 — RESULTS
+══════════════════════════════════ -->
+<div id="s-results" class="screen">
+  <div class="res-topbar">
+    <div class="logo">PSY<span>CHE</span></div>
+    <button class="btn btn-ghost" onclick="restart()">← Nuevo test</button>
+  </div>
+  <div class="res-body" id="resBody"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   DATA — 160 PREGUNTAS / 15 MÓDULOS
+═══════════════════════════════════════════ */
+
+const MODULES = [
+  {id:0, name:'Personalidad Central', icon:'🧠', desc:'Exploración de tus rasgos fundamentales de carácter y forma de ser en el mundo.', color:'#b8ff57'},
+  {id:1, name:'Intereses y Pasiones', icon:'🔥', desc:'Qué te mueve, qué te aburre, qué despierta tu curiosidad de manera natural.', color:'#ff5780'},
+  {id:2, name:'Habilidades Cognitivas', icon:'⚙️', desc:'Análisis de tu forma de pensar, procesar y resolver problemas complejos.', color:'#4db8ff'},
+  {id:3, name:'Inteligencias Múltiples', icon:'🌐', desc:'Evaluación de tus ocho tipos de inteligencia según el modelo de Howard Gardner.', color:'#ffb830'},
+  {id:4, name:'Inteligencia Emocional', icon:'💫', desc:'Cómo procesas, gestionas y usas tus emociones en el mundo real.', color:'#9b6fff'},
+  {id:5, name:'Liderazgo y Poder', icon:'⚡', desc:'Tu estilo natural de influenciar, decidir y mover a los demás.', color:'#57ffe0'},
+  {id:6, name:'Relaciones y Comunicación', icon:'🤝', desc:'Cómo te relacionas con otros, qué tipo de vínculos formas y cómo te expresas.', color:'#ff5780'},
+  {id:7, name:'Creatividad e Innovación', icon:'✨', desc:'Tu relación con lo nuevo, lo original y lo que aún no existe.', color:'#b8ff57'},
+  {id:8, name:'Estrés y Resiliencia', icon:'🛡️', desc:'Cómo reaccionas bajo presión, cómo te recuperas y cuáles son tus límites.', color:'#4db8ff'},
+  {id:9, name:'Valores y Ética', icon:'🧭', desc:'Tus principios fundamentales, lo que no negociarías nunca, tu brújula moral.', color:'#ffb830'},
+  {id:10, name:'Motivación y Ambición', icon:'🚀', desc:'Qué te impulsa, qué te paraliza, cuál es tu combustible interno.', color:'#9b6fff'},
+  {id:11, name:'Organización y Disciplina', icon:'📐', desc:'Tu relación con el orden, los plazos, la planificación y la constancia.', color:'#57ffe0'},
+  {id:12, name:'Mentalidad Emprendedora', icon:'💡', desc:'Tu tolerancia al riesgo, capacidad de innovar y crear desde cero.', color:'#b8ff57'},
+  {id:13, name:'Autoconocimiento Profundo', icon:'🪞', desc:'Sesgos, bloqueos, miedos y zonas de sombra que moldean tus decisiones.', color:'#ff5780'},
+  {id:14, name:'Visión de Futuro', icon:'🌅', desc:'Tu proyecto de vida, tipo de impacto que quieres dejar y estilo de vida ideal.', color:'#4db8ff'},
+];
+
+// Versiones controlan cuántos módulos y preguntas por módulo
+const VERSION_CONFIG = {
+  rapido: {modulesCount:8, qPerModule:5},
+  estandar: {modulesCount:12, qPerModule:8},
+  profundo: {modulesCount:15, qPerModule:11},
+};
+
+// ─── BANCO COMPLETO DE PREGUNTAS (165 preguntas, 11 por módulo × 15) ───
+
+const Q_BANK = [
+  // MOD 0 — PERSONALIDAD CENTRAL (11 q)
+  {m:0,t:'likert',dims:['intro','analítico'],
+   text:'Cuando estoy solo/a durante mucho tiempo, me siento recargado/a de energía, no agotado/a.'},
+  {m:0,t:'likert',dims:['detalle','perfeccionismo'],
+   text:'Cuando algo que hago tiene un error pequeño que nadie nota, igual me molesta internamente.'},
+  {m:0,t:'choice',dims:['apertura','rutina'],
+   text:'Encuentras una semana completamente libre, sin compromisos. ¿Qué sientes primero?',
+   opts:['Alivio total — el descanso es lo que más necesitaba','Emoción — ya estoy pensando en todo lo que voy a explorar','Un poco de ansiedad — no saber qué hacer me incomoda','Energía — voy a organizarme y aprovechar cada día','Depende completamente de cómo esté emocionalmente ese día'],
+   map:[[],['apertura',3,'curiosidad',2],['ansiedad',2,'rutina',2],['disciplina',3,'organización',2],[]]},
+  {m:0,t:'likert',dims:['adaptabilidad','apertura'],
+   text:'Cambiar de planes de último momento me energiza más de lo que me frustra.'},
+  {m:0,t:'dilemma',dims:['intro','social'],
+   textA:'Quedarte en casa leyendo o creando algo que realmente disfrutas',iconA:'📚',
+   textB:'Salir con personas que no conoces bien pero que parecen interesantes',iconB:'🌍'},
+  {m:0,t:'likert',dims:['autoconciencia'],
+   text:'Puedo identificar con precisión por qué me siento bien o mal en un momento dado.'},
+  {m:0,t:'scenario',dims:['perfeccionismo','resilience'],
+   text:'Entregas un proyecto que trabajaste semanas. Tu profesor lo califica con una nota mediocre y da retroalimentación vaga. Tú:',
+   opts:['Me afecta emocionalmente más de lo que quisiera admitir','Pido una revisión detallada y argumento mi trabajo','Acepto la nota y ya — no vale la pena el desgaste','Necesito saber exactamente qué falló para no repetirlo','Internamente me frustro, pero exterioizo tranquilidad'],
+   map:[['perfeccionismo',3,'ansiedad',2],['analítico',3,'assertiveness',2],['desapego',2],['detalle',3,'aprendizaje',3],['control_emoc',2]]},
+  {m:0,t:'likert',dims:['empatía','social'],
+   text:'Las emociones de otras personas me afectan incluso cuando no me involucra el conflicto.'},
+  {m:0,t:'likert',dims:['apertura','curiosidad'],
+   text:'Me siento genuinamente fascinado/a por ideas, culturas o campos completamente ajenos a mi vida.'},
+  {m:0,t:'reflection',dims:['autoconciencia','valores'],
+   text:'¿Qué comportamiento en otras personas te irrita más profundamente?',
+   opts:['La deshonestidad o la hipocresía','La mediocridad o la falta de esfuerzo','La irresponsabilidad o el desorden','La crueldad o la falta de empatía','La arrogancia o el ego desmedido'],
+   map:[['ética',3,'honestidad',3],['ambición',3,'disciplina',2],['organización',3,'responsabilidad',2],['empatía',3,'humanismo',2],['humildad',3]]},
+  {m:0,t:'likert',dims:['estabilidad','ansiedad'],
+   text:'Generalmente, en situaciones nuevas o inciertas, mi primera reacción es más de curiosidad que de miedo.'},
+
+  // MOD 1 — INTERESES (11 q)
+  {m:1,t:'choice',dims:['area_tech','area_ciencias'],
+   text:'Ves un documental fascinante y no puedes dormir pensando en él. ¿De qué es más probable que sea?',
+   opts:['El funcionamiento del cerebro humano o la psicología','Inteligencia artificial, robótica o el futuro tecnológico','Crímenes, juicios y sistemas de justicia','Artistas, músicos o creadores que cambiaron el mundo','Ecosistemas, cosmos o fenómenos naturales extremos'],
+   map:[['psicología',4,'neurociencia',3],['tech',4,'IA',3],['derecho',3,'criminología',2],['arte',4,'creatividad',3],['ciencias',4,'investigación',3]]},
+  {m:1,t:'likert',dims:['area_tech','ingeniería'],
+   text:'Cuando algo tecnológico falla a mi alrededor, siento el impulso de entender por qué y arreglarlo.'},
+  {m:1,t:'likert',dims:['area_arte','creatividad'],
+   text:'Crear algo — visual, musical, literario, físico — es una necesidad, no solo un pasatiempo.'},
+  {m:1,t:'likert',dims:['area_social','humanismo'],
+   text:'El sufrimiento o la injusticia social me generan una incomodidad genuina que me impulsa a actuar.'},
+  {m:1,t:'scenario',dims:['area'],
+   text:'Si tuvieras que elegir cómo pasar 3 meses de vacaciones productivas, ¿cuál eliges sin dudar?',
+   opts:['Trabajar en una startup tecnológica como pasante','Hacer voluntariado en una comunidad que necesita ayuda','Crear contenido o arte que llegue a miles de personas','Investigar un tema que nadie en tu entorno comprende','Construir mi propio negocio con lo que tengo disponible'],
+   map:[['tech',4,'ingeniería',3],['humanismo',4,'psicología',3],['comunicación',4,'arte',3],['investigación',4,'ciencias',3],['emprendimiento',4,'liderazgo',2]]},
+  {m:1,t:'likert',dims:['area_negocios','finanzas'],
+   text:'Entender cómo funcionan los mercados, las finanzas y los modelos de negocio me resulta genuinamente interesante.'},
+  {m:1,t:'likert',dims:['area_salud','biología'],
+   text:'Me atrae la idea de saber cómo funciona el cuerpo humano a nivel molecular o sistémico.'},
+  {m:1,t:'dilemma',dims:['area_diseño','area_ingeniería'],
+   textA:'Diseñar la experiencia visual y emocional de un producto',iconA:'🎨',
+   textB:'Diseñar la arquitectura técnica y funcional de ese mismo producto',iconB:'⚙️'},
+  {m:1,t:'likert',dims:['area_educación','pedagogía'],
+   text:'Explicar algo de manera que otra persona realmente lo entienda me da una satisfacción profunda.'},
+  {m:1,t:'choice',dims:['área_RI','derecho'],
+   text:'Si pudieras tener un año sabático haciendo lo que quieras, ¿qué harías?',
+   opts:['Aprender 2 idiomas y viajar estudiando culturas distintas','Escribir un libro, álbum o serie de obras propias','Lanzar una startup o proyecto con impacto real','Profundizar en una especialización científica o técnica','Trabajar con comunidades vulnerables en proyectos sociales'],
+   map:[['relaciones_int',4,'culturas',3],['arte',4,'comunicación',3],['emprendimiento',4,'liderazgo',3],['ciencias',4,'analítico',3],['humanismo',4,'psicología',3]]},
+  {m:1,t:'likert',dims:['área_audiovisual','narrativa'],
+   text:'Las historias — en cualquier formato — tienen el poder de cambiar cómo las personas piensan, y quiero usarlo.'},
+
+  // MOD 2 — HABILIDADES COGNITIVAS (11 q)
+  {m:2,t:'likert',dims:['analítico','matemático'],
+   text:'Cuando me enfrento a un problema complejo, mi mente automáticamente lo descompone en partes más pequeñas.'},
+  {m:2,t:'likert',dims:['verbal','lingüístico'],
+   text:'Expreso ideas complejas con claridad y precisión, tanto de forma oral como escrita.'},
+  {m:2,t:'likert',dims:['espacial','visual'],
+   text:'Puedo imaginar objetos rotando en 3D o visualizar mentalmente cómo quedaría algo antes de construirlo.'},
+  {m:2,t:'scenario',dims:['analítico','decisión'],
+   text:'Estás ante un problema que tiene múltiples soluciones posibles y poco tiempo. ¿Cómo lo abordas?',
+   opts:['Evalúo rápidamente pros y contras de cada opción con lógica','Voy con mi instinto — el tiempo no me permite analizar demasiado','Busco quién ya resolvió algo parecido y aprendo de ahí','Divido el problema en partes y resuelvo la más urgente primero','Pido input de alguien más antes de decidir'],
+   map:[['analítico',4],['intuición',3],['aprendizaje',3,'investigación',2],['analítico',3,'organización',2],['colaboración',3,'social',2]]},
+  {m:2,t:'likert',dims:['lógico','sistemático'],
+   text:'Me resulta natural encontrar errores en razonamientos o argumentos que escucho.'},
+  {m:2,t:'likert',dims:['abstracto','filosófico'],
+   text:'Disfruto pensando en preguntas que no tienen respuesta definitiva: el significado de la vida, la conciencia, el tiempo.'},
+  {m:2,t:'dilemma',dims:['analítico','intuitivo'],
+   textA:'Llegar a una conclusión después de analizar todos los datos disponibles',iconA:'📊',
+   textB:'Confiar en tu intuición cuando los datos no son suficientes',iconB:'⚡'},
+  {m:2,t:'likert',dims:['detalle','minucioso'],
+   text:'Cuando aprendo algo nuevo, necesito entender el "por qué" detrás de cada concepto, no solo el "cómo".'},
+  {m:2,t:'likert',dims:['crítico','analítico'],
+   text:'Cuestiono de manera natural la información que recibo, incluso de fuentes que se consideran confiables.'},
+  {m:2,t:'scenario',dims:['creatividad','analítico'],
+   text:'Un profesor te da un problema matemático complejo y una hoja en blanco. Lo primero que haces es:',
+   opts:['Anotar todas las variables y relaciones conocidas sistemáticamente','Dibujar un esquema visual del problema','Buscar si hay un patrón o regla que ya conozca','Escribir en palabras lo que el problema me está pidiendo','Intentar una solución aunque esté equivocada para ver qué pasa'],
+   map:[['sistemático',4,'analítico',3],['visual',3,'espacial',3],['lógico',3,'patrones',2],['verbal',3,'lingüístico',2],['experimental',3,'creatividad',2]]},
+  {m:2,t:'likert',dims:['síntesis','big_picture'],
+   text:'Tengo facilidad para ver el panorama completo antes de perderme en los detalles.'},
+
+  // MOD 3 — INTELIGENCIAS MÚLTIPLES (11 q)
+  {m:3,t:'likert',dims:['ling','lingüístico'],
+   text:'Las palabras son herramientas poderosas para mí — disfruto jugar con el lenguaje, los matices y el tono.'},
+  {m:3,t:'likert',dims:['log_mat','matemático'],
+   text:'Los sistemas, las estructuras lógicas y los números me resultan casi estéticamente satisfactorios.'},
+  {m:3,t:'likert',dims:['espa','espacial'],
+   text:'Recuerdo los espacios físicos con detalle inusual: distribución de habitaciones, rutas, disposición de objetos.'},
+  {m:3,t:'likert',dims:['mus','musical'],
+   text:'Puedo reconocer o reproducir ritmos, melodías o patrones musicales con facilidad notable.'},
+  {m:3,t:'likert',dims:['corp_kin','kinestésica'],
+   text:'Aprendo mejor haciendo, tocando o moviéndome — el conocimiento sin práctica me frustra.'},
+  {m:3,t:'likert',dims:['nat','naturalista'],
+   text:'Los ecosistemas, los animales, las plantas o los fenómenos climáticos captan mi atención de manera especial.'},
+  {m:3,t:'likert',dims:['inter','interpersonal'],
+   text:'Entiendo con mucha rapidez qué tipo de persona es alguien: sus motivaciones, inseguridades y necesidades.'},
+  {m:3,t:'likert',dims:['intra','intrapersonal'],
+   text:'Tengo un nivel de autoconocimiento que sorprende a las personas que me conocen bien.'},
+  {m:3,t:'choice',dims:['intel_dom'],
+   text:'Si pudieras ser maestro/a de una sola cosa por el resto de tu vida, ¿qué sería?',
+   opts:['Escritura creativa o retórica persuasiva','Matemáticas avanzadas o programación de sistemas','Diseño visual, arquitectura o escultura','Composición musical o producción sonora','Filosofía de la mente o psicología profunda'],
+   map:[['ling',4],['log_mat',4],['espa',4,'visual',3],['mus',4],['intra',4,'psicología',3]]},
+  {m:3,t:'scenario',dims:['intel_dom'],
+   text:'Te piden explicar el concepto de "tiempo" a un niño de 8 años. ¿Cómo lo haces?',
+   opts:['Lo escribo como un cuento o historia con personajes','Lo demuestro con objetos físicos o movimiento','Lo dibujo o creo una línea de tiempo visual','Lo explico con analogías lógicas o comparaciones numéricas','Le pregunto qué siente él cuando espera algo — y parto de ahí'],
+   map:[['ling',3],['corp_kin',3],['espa',3,'visual',3],['log_mat',3],['inter',4,'empatía',3]]},
+  {m:3,t:'likert',dims:['intra','autoconciencia'],
+   text:'Entiendo cómo mis experiencias pasadas moldean mis reacciones actuales de manera consciente.'},
+
+  // MOD 4 — INTELIGENCIA EMOCIONAL (11 q)
+  {m:4,t:'likert',dims:['autoregulación','control_emoc'],
+   text:'Cuando estoy enojado/a o frustrado/a, puedo esperar antes de reaccionar y elegir cómo responder.'},
+  {m:4,t:'likert',dims:['empatía','compasión'],
+   text:'Cuando alguien me cuenta un problema, mi primera reacción es entender cómo se siente, no dar soluciones.'},
+  {m:4,t:'scenario',dims:['IE','emocional'],
+   text:'En una discusión acalorada con alguien importante para ti, en el punto más tenso, tú:',
+   opts:['Me desconecto internamente para calmarse antes de hablar','Expreso exactamente lo que siento en ese momento sin filtro','Busco entender qué está sintiendo la otra persona primero','Termino la discusión con un argumento lógico contundente','Cambio el tema para bajar la tensión, aunque no esté resuelto'],
+   map:[['autoregulación',4],['autenticidad',3,'impulsividad',2],['empatía',4,'IE',3],['log_mat',2,'control_emoc',2],['evasión',2,'diplomacia',2]]},
+  {m:4,t:'likert',dims:['autoconciencia_emoc'],
+   text:'Noto cuándo mis emociones están influyendo en mi toma de decisiones y lo tomo en cuenta.'},
+  {m:4,t:'likert',dims:['motivación_interna','resiliencia_emoc'],
+   text:'Cuando fracaso en algo importante, el motor para intentarlo de nuevo viene principalmente de mí mismo/a, no del apoyo externo.'},
+  {m:4,t:'dilemma',dims:['empatía','lógico'],
+   textA:'Tomar la decisión más justa aunque lastime emocionalmente a alguien',iconA:'⚖️',
+   textB:'Tomar la decisión que proteja emocionalmente a alguien aunque no sea la más justa',iconB:'💛'},
+  {m:4,t:'likert',dims:['ansiedad','neuroticismo'],
+   text:'A veces me preocupo por situaciones que todavía no han pasado y probablemente no pasarán.'},
+  {m:4,t:'likert',dims:['assertiveness','comunicación_emoc'],
+   text:'Soy capaz de decir "no" sin sentirme culpable cuando algo no está alineado con mis valores o límites.'},
+  {m:4,t:'likert',dims:['empatía','burnout_riesgo'],
+   text:'Las emociones intensas de las personas cercanas a mí me afectan aunque trate de no dejarlas entrar.'},
+  {m:4,t:'scenario',dims:['IE'],
+   text:'Un amigo/a cercano/a toma una decisión que crees que le va a lastimar. Tú:',
+   opts:['Le digo directamente lo que pienso aunque se moleste','Espero a que me pregunte — respeto su autonomía','Busco el momento adecuado para expresar mi preocupación con cuidado','Apoyo su decisión en público aunque en privado disienta','Le hago preguntas para que llegue solo/a a las conclusiones'],
+   map:[['honestidad',3,'assertiveness',2],['respeto',3,'autonomía',3],['IE',4,'diplomatismo',3],['lealtad',2,'evasión',2],['empatía',4,'pedagogía',2]]},
+  {m:4,t:'likert',dims:['gestión_emoc'],
+   text:'Encuentro formas sanas de procesar emociones difíciles sin suprimirlas ni desbordarse.'},
+
+  // MOD 5 — LIDERAZGO (11 q)
+  {m:5,t:'likert',dims:['liderazgo','influencia'],
+   text:'Cuando hay incertidumbre en un grupo, las personas naturalmente me miran buscando dirección.'},
+  {m:5,t:'choice',dims:['estilo_liderazgo'],
+   text:'Si fueras el/la director/a de un proyecto importante con un equipo de 10 personas, ¿cuál sería tu estilo?',
+   opts:['Defino la visión y doy autonomía total a cada persona','Marco objetivos claros y superviso el avance regularmente','Trabajamos en conjunto — soy uno más del equipo','Doy retroalimentación constante y mentorizo a cada miembro','Establezco reglas claras y espero que se cumplan'],
+   map:[['liderazgo_visionario',4],['liderazgo_estratégico',4],['liderazgo_colaborativo',4],['liderazgo_coach',4],['liderazgo_directivo',4]]},
+  {m:5,t:'likert',dims:['decisión','responsabilidad'],
+   text:'No me incomoda tomar decisiones difíciles que afecten a otros cuando creo que es lo correcto.'},
+  {m:5,t:'likert',dims:['influencia','persuasión'],
+   text:'Cuando creo en algo, tengo capacidad natural de convencer a otros para que también lo crean o lo hagan.'},
+  {m:5,t:'scenario',dims:['liderazgo','presión'],
+   text:'Tu equipo está en crisis a 48 horas de la entrega. Dos personas clave se pelean y el resultado está en riesgo. Tú:',
+   opts:['Separo el conflicto personal del profesional y reorganizo prioridades','Me hago cargo personalmente de lo que está en riesgo','Medío entre las dos personas antes que nada — sin equipo no hay resultado','Llamo a alguien externo de confianza para resolver la mediación','Evalúo si tiene sentido seguir o negociar una prórroga'],
+   map:[['liderazgo_estratégico',4,'decisión',3],['ejecución',4,'responsabilidad',3],['liderazgo_coach',4,'empatía',3],['humildad',3,'pragmatismo',2],['pensamiento_crítico',3,'pragmatismo',2]]},
+  {m:5,t:'likert',dims:['responsabilidad','accountability'],
+   text:'Cuando algo falla en un proyecto donde participé, no busco culpables — primero me pregunto qué pude haber hecho mejor.'},
+  {m:5,t:'dilemma',dims:['poder','servicio'],
+   textA:'Ser el/la líder visible que toma las decisiones finales y recibe el crédito',iconA:'👑',
+   textB:'Ser quien está detrás haciendo posible que los demás brillen sin necesitar el crédito',iconB:'🌱'},
+  {m:5,t:'likert',dims:['liderazgo','carisma'],
+   text:'Tengo facilidad para energizar a un grupo cuando están desmotivados o perdidos.'},
+  {m:5,t:'likert',dims:['ambición','poder'],
+   text:'Aspiro a tener posiciones de liderazgo o influencia significativa en algún campo que me importe.'},
+  {m:5,t:'likert',dims:['humildad','ego'],
+   text:'Puedo reconocer y celebrar abiertamente cuando alguien de mi equipo supera mi propio desempeño.'},
+  {m:5,t:'reflection',dims:['estilo_liderazgo'],
+   text:'Cuando un grupo te sigue, ¿qué crees que les genera más confianza en ti?',
+   opts:['Mi claridad de visión — saben hacia dónde vamos','Mi competencia técnica — saben que sé de lo que hablo','Mi presencia y carisma — los hago sentir parte de algo','Mi fiabilidad — siempre cumplo lo que digo','Mi empatía — sienten que me importan como personas'],
+   map:[['liderazgo_visionario',4],['expertise',4,'analítico',2],['carisma',4],['confianza',4,'responsabilidad',2],['liderazgo_coach',4,'empatía',3]]},
+
+  // MOD 6 — RELACIONES Y COMUNICACIÓN (11 q)
+  {m:6,t:'likert',dims:['extroversión','social'],
+   text:'Salir de una reunión larga con muchas personas me deja con energía, no sin ella.'},
+  {m:6,t:'likert',dims:['red_social','networking'],
+   text:'Construir y mantener redes de contactos me resulta natural y disfrutable, no forzado.'},
+  {m:6,t:'scenario',dims:['comunicación','social'],
+   text:'Estás en un evento con muchas personas que no conoces. ¿Cuál de estas situaciones describes mejor?',
+   opts:['Termino el evento habiendo hablado con casi todos','Tengo 2-3 conversaciones muy profundas con pocas personas','Me quedo cerca de quien conozco y espero que se acerquen','Observo el ambiente un buen rato antes de integrarme','Me voy antes que los demás — los eventos así me agotan'],
+   map:[['extroversión',4,'networking',3],['introversión',3,'profundidad',3],['timidez',3,'introversión',2],['observador',3],['introversión',4,'agotamiento_social',2]]},
+  {m:6,t:'likert',dims:['comunicación_oral','persuasión'],
+   text:'Hablar frente a un grupo numeroso me genera más adrenalina que miedo.'},
+  {m:6,t:'likert',dims:['escucha_activa','empatía'],
+   text:'Cuando alguien me habla, tengo la disciplina de no pensar en mi respuesta mientras aún están hablando.'},
+  {m:6,t:'likert',dims:['diplomatismo','conflicto'],
+   text:'Prefiero decir algo incómodo con tacto antes que omitirlo para evitar el conflicto.'},
+  {m:6,t:'dilemma',dims:['honestidad','diplomacia'],
+   textA:'Decir siempre lo que piensas aunque incomode a alguien',iconA:'🗣️',
+   textB:'Escoger con cuidado qué dices y cuándo para preservar la relación',iconB:'🕊️'},
+  {m:6,t:'likert',dims:['escritura','comunicación_escrita'],
+   text:'Prefiero enviar un mensaje bien redactado antes que una llamada improvisada — las palabras escritas me salen mejor.'},
+  {m:6,t:'likert',dims:['conflicto','assertiveness'],
+   text:'En conflictos directos, generalmente logro mantener la posición que creo correcta sin volverme agresivo/a.'},
+  {m:6,t:'scenario',dims:['comunicación'],
+   text:'Te piden dar una presentación importante para mañana sobre un tema que no dominas del todo. Tú:',
+   opts:['Estudio intensamente toda la noche hasta sentirme seguro/a','Preparo bien la estructura y confío en mi capacidad de comunicar','Digo honestamente que no soy el experto y traigo a quien sí lo es','Acepto el reto como oportunidad — la incomodidad me hace crecer','Busco apoyo visual y datos para compensar lo que no sé'],
+   map:[['disciplina',3,'preparación',2],['comunicación_oral',4,'confianza',2],['honestidad',4,'humildad',3],['crecimiento',4,'resiliencia',2],['analítico',3,'creatividad',2]]},
+  {m:6,t:'likert',dims:['empatía','conexión'],
+   text:'Las personas me confían cosas personales importantes con relativa facilidad y frecuencia.'},
+
+  // MOD 7 — CREATIVIDAD E INNOVACIÓN (11 q)
+  {m:7,t:'likert',dims:['creatividad','divergente'],
+   text:'Cuando tengo que resolver algo, siempre encuentro al menos una solución que nadie más consideró.'},
+  {m:7,t:'likert',dims:['arte','estética'],
+   text:'La estética — diseño, belleza, composición visual — es algo que noto y que me importa profundamente.'},
+  {m:7,t:'choice',dims:['tipo_creatividad'],
+   text:'Si te dejaran crear algo sin restricciones de ningún tipo, ¿qué crearías?',
+   opts:['Una narrativa o historia que cambie cómo las personas ven el mundo','Un sistema tecnológico que resuelva un problema que nadie ha resuelto','Una experiencia visual o sensorial que genere emociones específicas','Un movimiento social o cultural que transforme comunidades','Un método o teoría que explique algo que nadie ha explicado bien'],
+   map:[['narrativa',4,'escritura',3],['tech',4,'innovación',3],['diseño',4,'arte',3],['liderazgo',3,'humanismo',4],['investigación',4,'analítico',3]]},
+  {m:7,t:'likert',dims:['innovación','ruptura'],
+   text:'Me siento incómodo/a con la frase "así siempre se ha hecho" — es la señal de que algo debe cambiar.'},
+  {m:7,t:'likert',dims:['tolerancia_ambigüedad','creatividad'],
+   text:'Trabajo bien en proyectos donde las reglas no están completamente definidas.'},
+  {m:7,t:'scenario',dims:['creatividad','tipo'],
+   text:'Te contratan para rediseñar la experiencia de llegar al colegio cada mañana. Tus primeros pasos son:',
+   opts:['Investigar qué sienten los estudiantes ahora y qué no funciona','Explorar referencias de otros países o sistemas educativos','Imaginar cómo sería la experiencia perfecta sin límites y luego hacerla viable','Analizar los datos de tardanza, deserción y satisfacción','Hablar con cada persona involucrada antes de proponer nada'],
+   map:[['empatía',3,'diseño_UX',4],['investigación',4,'curiosidad',3],['creatividad',4,'innovación',3],['analítico',4,'datos',3],['social',3,'colaboración',3]]},
+  {m:7,t:'likert',dims:['arte','expresión'],
+   text:'Necesito tener algún canal de expresión creativa en mi vida para sentirme bien — es casi una necesidad fisiológica.'},
+  {m:7,t:'dilemma',dims:['creativo','técnico'],
+   textA:'Crear algo original e imperfecto que nadie más habría hecho',iconA:'🎨',
+   textB:'Ejecutar algo técnicamente perfecto siguiendo métodos probados',iconB:'🔧'},
+  {m:7,t:'likert',dims:['curiosidad','exploración'],
+   text:'Abro múltiples pestañas, leo de temas variados y tengo muchos intereses activos al mismo tiempo.'},
+  {m:7,t:'likert',dims:['riesgo','experimentación'],
+   text:'Prefiero intentar algo nuevo aunque falle, antes que repetir lo mismo que ya sé que funciona.'},
+  {m:7,t:'reflection',dims:['creatividad'],
+   text:'¿Cuándo fue la última vez que creaste algo — un texto, dibujo, código, idea, canción, solución — de la nada?',
+   opts:['Esta semana — es algo que hago constantemente','Este mes — cuando tengo tiempo lo busco','Hace varios meses — me gustaría hacerlo más','No recuerdo bien — no es algo que haga naturalmente','Nunca he creado algo así de cero — prefiero ejecutar lo que otros diseñan'],
+   map:[['creatividad',4,'arte',3],['creatividad',3,'arte',2],['creatividad',1],['creatividad',0],['ejecución',3,'técnico',2]]},
+
+  // MOD 8 — ESTRÉS Y RESILIENCIA (11 q)
+  {m:8,t:'likert',dims:['tolerancia_estrés','resiliencia'],
+   text:'Bajo presión extrema, mi rendimiento generalmente mejora en vez de empeorar.'},
+  {m:8,t:'likert',dims:['resiliencia','recuperación'],
+   text:'Después de un fracaso significativo, vuelvo a la acción en días, no en semanas o meses.'},
+  {m:8,t:'scenario',dims:['estrés','respuesta'],
+   text:'Tienes tres proyectos importantes con fecha límite el mismo día. ¿Cuál es tu respuesta real?',
+   opts:['Hago una lista de prioridades y empiezo por el más urgente sin pánico','Me estreso bastante pero igual lo resuelvo — solo necesito el caos para activarme','Negocio extensiones de plazo en cuanto veo que no alcanza el tiempo','Me bloqueo el primer día y luego me desquito en la recta final','Distribuyo el tiempo meticulosamente desde el principio para no llegar al límite'],
+   map:[['organización',4,'calma',3],['tolerancia_estrés',3,'procrastinación',2],['comunicación',3,'pragmatismo',3],['ansiedad',3,'procrastinación',3],['disciplina',4,'planificación',4]]},
+  {m:8,t:'likert',dims:['burnout_riesgo','límites'],
+   text:'Sé reconocer cuándo estoy llegando a mi límite y tomo medidas antes de colapsar.'},
+  {m:8,t:'likert',dims:['ansiedad','catastrofismo'],
+   text:'Cuando algo importante sale mal, en algún momento llego a pensar en el "peor escenario posible".'},
+  {m:8,t:'dilemma',dims:['perfeccionismo','pragmatismo'],
+   textA:'Entregar algo perfecto aunque llegue tarde',iconA:'💎',
+   textB:'Entregar algo bueno a tiempo aunque no sea perfecto',iconB:'⏱️'},
+  {m:8,t:'likert',dims:['adaptabilidad','cambio'],
+   text:'Cuando los planes cambian de manera inesperada, generalmente me adapto con relativa rapidez.'},
+  {m:8,t:'likert',dims:['autocuidado','límites'],
+   text:'Priorizo mi bienestar emocional y físico incluso cuando hay presión externa para no hacerlo.'},
+  {m:8,t:'scenario',dims:['resiliencia'],
+   text:'Llevas 6 meses trabajando en un proyecto que significaba mucho para ti y lo cancelan. ¿Cómo reaccionas?',
+   opts:['Me duele profundamente, pero en unos días ya estoy pensando en qué sigue','Me toma semanas procesar emocionalmente algo así','Lo acepto rápido — no tengo mucho apego a los proyectos','Analizo qué salió mal para no repetirlo y canalizo la frustración','Busco apoyo de personas cercanas para procesar lo que siento'],
+   map:[['resiliencia',4],['impacto_emoc',3],['desapego',3],['analítico',3,'aprendizaje',3],['red_apoyo',3,'empatía',2]]},
+  {m:8,t:'likert',dims:['tolerancia_frustración','resiliencia'],
+   text:'Cuando algo no sale como espero después de mucho esfuerzo, la frustración pasa relativamente rápido.'},
+  {m:8,t:'likert',dims:['estrés','control'],
+   text:'Cuando siento que no controlo una situación, puedo igual encontrar calma centrándome en lo que sí depende de mí.'},
+
+  // MOD 9 — VALORES Y ÉTICA (11 q)
+  {m:9,t:'likert',dims:['honestidad','integridad'],
+   text:'Actuaría de la misma manera aunque nadie estuviera mirando y no hubiera consecuencias por hacerlo distinto.'},
+  {m:9,t:'likert',dims:['impacto_social','humanismo'],
+   text:'Para mí, el éxito profesional sin impacto positivo en el mundo se siente vacío.'},
+  {m:9,t:'scenario',dims:['ética','dilema'],
+   text:'Descubres que tu empresa o institución hace algo éticamente cuestionable que legalmente no es ilegal. Tú:',
+   opts:['Lo denuncio internamente aunque me cueste — no puedo callarlo','Lo hablo con personas de confianza antes de decidir qué hacer','Evalúo cuánto me afecta directamente antes de actuar','Me voy en cuanto puedo — no quiero ser parte de eso','Lo tolero si el daño no es masivo — el mundo no es perfecto'],
+   map:[['integridad',4,'honestidad',4],['prudencia',3,'IE',2],['pragmatismo',3],['valores',4,'autonomía',2],['pragmatismo',3,'flexibilidad',2]]},
+  {m:9,t:'likert',dims:['justicia','equidad'],
+   text:'Me incomoda profundamente cuando las personas no reciben lo que merecen por su trabajo o esfuerzo.'},
+  {m:9,t:'dilemma',dims:['dinero','propósito'],
+   textA:'Una carrera muy bien pagada que no te apasiona especialmente',iconA:'💰',
+   textB:'Una carrera de bajo ingreso que sientes como tu verdadera misión en el mundo',iconB:'🌟'},
+  {m:9,t:'likert',dims:['sostenibilidad','futuro'],
+   text:'El impacto ambiental y social de mis decisiones profesionales importa en mi toma de decisiones.'},
+  {m:9,t:'reflection',dims:['valores_core'],
+   text:'Si tuvieras que elegir una sola cosa que nunca sacrificarías por ningún trabajo o carrera, ¿cuál sería?',
+   opts:['Mi integridad — no haría algo que contradiga mis valores éticos','Mi libertad — no trabajaría en algo que me quite autonomía','Mis relaciones — no sacrificaría a mi familia o amigos por una carrera','Mi salud mental — no me sometería a ambientes que me destruyan','Mi impacto — no trabajaría en algo que no genere valor real en el mundo'],
+   map:[['integridad',4,'honestidad',3],['autonomía',4,'emprendimiento',2],['familia',4,'social',2],['autocuidado',4,'límites',3],['propósito',4,'humanismo',3]]},
+  {m:9,t:'likert',dims:['responsabilidad','compromiso'],
+   text:'Cuando me comprometo con algo, lo entrego aunque cueste más de lo que esperaba.'},
+  {m:9,t:'likert',dims:['autonomía','independencia'],
+   text:'Necesito tener voz y control real sobre cómo hago mi trabajo — las microgestiones me desconectan.'},
+  {m:9,t:'scenario',dims:['ética'],
+   text:'Te ofrecen trabajar en un proyecto que va en contra de una causa que apoyas, pero pagaría el doble de cualquier alternativa. Tú:',
+   opts:['Lo rechazo sin duda — no está negociable','Pido más información antes de decidir — quizá no es tan malo','Lo acepto temporalmente con un plan claro de cuándo salir','Pido mi precio más alto y lo evalúo como una transacción','Me debate enormemente — no hay respuesta fácil para mí'],
+   map:[['integridad',4,'valores',4],['analítico',3,'prudencia',2],['pragmatismo',3,'planificación',2],['lógico',2,'dinero_motiv',2],[]]},
+  {m:9,t:'likert',dims:['transparencia','autenticidad'],
+   text:'Me siento más cómodo/a siendo completamente auténtico/a que adaptando mi imagen a lo que los demás esperan.'},
+
+  // MOD 10 — MOTIVACIÓN Y AMBICIÓN (11 q)
+  {m:10,t:'likert',dims:['motivación_interna','autodisciplina'],
+   text:'No necesito presión externa para trabajar duro en algo que me importa — el impulso viene solo.'},
+  {m:10,t:'likert',dims:['ambición','logro'],
+   text:'Tengo metas que la mayoría de personas de mi edad consideraría demasiado ambiciosas.'},
+  {m:10,t:'choice',dims:['motivación_tipo'],
+   text:'¿Qué te mueve más profundamente a esforzarte?',
+   opts:['La posibilidad de dominar algo hasta la excelencia','El reconocimiento y la admiración de personas que respeto','El impacto real y medible que genera mi trabajo en otros','La libertad y calidad de vida que quiero construirme','La curiosidad pura — quiero saber y entender más que nadie'],
+   map:[['dominio',4,'excelencia',3],['reconocimiento',4,'status',2],['impacto',4,'humanismo',3],['libertad',4,'autonomía',3],['curiosidad',4,'investigación',3]]},
+  {m:10,t:'likert',dims:['procrastinación','ejecución'],
+   text:'Empiezo tareas importantes sin postergarlas — la procrastinación rara vez es un problema para mí.'},
+  {m:10,t:'likert',dims:['metas','visión_futuro'],
+   text:'Tengo claridad sobre lo que quiero lograr en los próximos 5-10 años, aunque no conozca el camino exacto.'},
+  {m:10,t:'scenario',dims:['motivación','ambición'],
+   text:'Puedes tener un gran éxito rápido pero efímero, o un impacto más profundo que lleva 10 años construir. ¿Cuál buscas?',
+   opts:['El impacto profundo — prefiero construir algo que dure','El éxito rápido — el mundo cambia demasiado para planear a 10 años','Ambos si es posible — no tienen que ser mutuamente excluyentes','Lo que dé más libertad financiera en el menor tiempo','Depende completamente del tipo de proyecto y contexto'],
+   map:[['visión_largo',4,'paciencia',3],['corto_plazo',3,'dinamismo',2],['ambición',4,'pragmatismo',2],['dinero_motiv',4],['pragmatismo',3,'analítico',2]]},
+  {m:10,t:'likert',dims:['éxito','logro'],
+   text:'Me resulta difícil sentirme satisfecho/a con mis logros — siempre hay una barra más alta que alcanzar.'},
+  {m:10,t:'dilemma',dims:['estabilidad','riesgo'],
+   textA:'Un trabajo estable con ingresos seguros aunque no te apasione completamente',iconA:'🏠',
+   textB:'Un proyecto propio incierto con posibilidad de gran éxito o gran fracaso',iconB:'🎲'},
+  {m:10,t:'likert',dims:['consistencia','hábitos'],
+   text:'Mantengo hábitos productivos incluso en épocas donde tengo poco control externo sobre mi tiempo.'},
+  {m:10,t:'likert',dims:['motivación_interna','extrínseco'],
+   text:'Si nadie supiera nunca los logros que tengo, seguiría buscándolos igual.'},
+  {m:10,t:'reflection',dims:['propósito','motivación'],
+   text:'¿Cuál de estas frases describe mejor tu relación actual con el futuro?',
+   opts:['Tengo una visión clara y trabajo activamente hacia ella','Sé lo que quiero pero no sé bien cómo llegar — eso me frustra','Aún no tengo claridad y estoy en proceso de descubrirlo','Sé que quiero algo grande, pero el camino me abruma un poco','Vivo más el presente que el futuro — lo que venga, vendrá'],
+   map:[['visión_futuro',4,'organización',2],['ambición',3,'ansiedad',2],['exploración',4,'autoconocimiento',2],['ambición',3,'ansiedad_futuro',3],[]]},
+
+  // MOD 11 — ORGANIZACIÓN Y DISCIPLINA (11 q)
+  {m:11,t:'likert',dims:['organización','planificación'],
+   text:'Mi espacio de trabajo y mis herramientas de organización están siempre estructuradas y al día.'},
+  {m:11,t:'likert',dims:['disciplina','autodisciplina'],
+   text:'Mantengo compromisos conmigo mismo/a aunque nadie me esté evaluando ni haya consecuencias visibles.'},
+  {m:11,t:'choice',dims:['estilo_trabajo'],
+   text:'¿Cómo describes mejor tu forma de trabajar?',
+   opts:['Estructurado/a: me funciona mejor con listas, tiempos y objetivos claros','Fluido/a: el trabajo orgánico y sin estructura rígida me da mejores resultados','Intenso/a: trabajo en ráfagas de alta energía con pausas largas','Colaborativo/a: rindo mejor cuando hay otras personas involucradas','Adaptable: cambio de estilo según el proyecto y el contexto'],
+   map:[['planificación',4,'organización',3],['autonomía',3,'creatividad',2],['intensidad',3,'espontáneo',2],['social',4,'colaboración',3],[]]},
+  {m:11,t:'likert',dims:['multitarea','enfoque'],
+   text:'Prefiero profundizar en una sola cosa a la vez antes que manejar varios proyectos simultáneamente.'},
+  {m:11,t:'likert',dims:['plazos','responsabilidad'],
+   text:'Entrego lo que me comprometí, cuando me comprometí — los plazos son para mí un tema de integridad personal.'},
+  {m:11,t:'scenario',dims:['organización','estrés'],
+   text:'Tu semana está completamente desordenada — reuniones inesperadas, tareas urgentes y un proyecto sin avanzar. Tú:',
+   opts:['Hago una lista de prioridades y empiezo por lo más urgente e importante','Entro en modo "apagar incendios" — reacciono a lo que llega','Cancelo o reprogramo lo no esencial para recuperar control','Me estreso internamente pero funciono igual con el caos','Me bloqueo hasta que el ruido disminuya y puedo pensar con claridad'],
+   map:[['planificación',4,'calma',3],['reactividad',3],['organización',4,'assertiveness',2],['resiliencia',3,'estrés',2],['introversión',3,'ansiedad',2]]},
+  {m:11,t:'likert',dims:['rutina','consistencia'],
+   text:'Las rutinas claras me dan estabilidad y productividad, no aburrimiento.'},
+  {m:11,t:'dilemma',dims:['proceso','resultado'],
+   textA:'Seguir el proceso correcto aunque el resultado final tarde más',iconA:'🗺️',
+   textB:'Llegar al resultado lo antes posible aunque el proceso sea imperfecto',iconB:'🏁'},
+  {m:11,t:'likert',dims:['perfeccionismo','detalle'],
+   text:'Me cuesta entregar algo que considero "suficientemente bueno" cuando sé que podría ser mejor.'},
+  {m:11,t:'likert',dims:['ejecución','completar'],
+   text:'Tengo la disciplina de terminar proyectos aunque hayan perdido parte de su emoción inicial.'},
+  {m:11,t:'reflection',dims:['disciplina'],
+   text:'¿Cuál de estas describe tu relación con la procrastinación?',
+   opts:['Rara vez procrastino — actúo rápido cuando sé que algo hay que hacer','Procrastino en tareas que no me motivan, pero soy ágil en lo que me importa','Procrastino bastante y me genera culpa y estrés — es algo que quiero cambiar','Procrastino estratégicamente — uso el tiempo de presión para trabajar mejor','Tengo disciplina cuando hay consecuencias reales, y no tanto cuando no las hay'],
+   map:[['disciplina',4],['motivación_interna',3,'selección',2],['ansiedad',3,'autodisciplina',0],['presión',3,'estrés',2],['extrínseco',3]]},
+
+  // MOD 12 — MENTALIDAD EMPRENDEDORA (11 q)
+  {m:12,t:'likert',dims:['emprendimiento','riesgo'],
+   text:'La idea de crear algo desde cero me genera más emoción que miedo, aunque implique perder estabilidad.'},
+  {m:12,t:'likert',dims:['tolerancia_incertidumbre','riesgo'],
+   text:'Me siento cómodo/a tomando decisiones importantes con información incompleta.'},
+  {m:12,t:'choice',dims:['perfil_emprendedor'],
+   text:'Si tuvieras que lanzar algo mañana, ¿cuál sería?',
+   opts:['Un producto tecnológico que resuelva un problema real que veo','Un servicio creativo o de contenido para un nicho específico','Una comunidad o plataforma que conecte personas con algo en común','Un negocio de servicio profesional en algo que ya domino','Un proyecto de impacto social que genere cambio medible'],
+   map:[['tech',3,'emprendimiento',3],['creativo',3,'arte',2],['comunidad',3,'social',2],['consultora',3,'expertise',2],['impacto',4,'humanismo',3]]},
+  {m:12,t:'likert',dims:['innovación','disrupción'],
+   text:'Cuando veo un sistema o producto que podría ser radicalmente mejor, no puedo simplemente usarlo — quiero mejorarlo.'},
+  {m:12,t:'likert',dims:['ventas','persuasión'],
+   text:'No me incomoda vender o convencer a otros del valor de algo en lo que creo.'},
+  {m:12,t:'scenario',dims:['emprendimiento','adversidad'],
+   text:'Tu primer negocio fracasa después de 8 meses y pierdes dinero y tiempo. ¿Cuál es tu reacción real?',
+   opts:['Lo proceso emocionalmente un tiempo y luego vuelvo a intentar algo nuevo','Analizo en detalle qué falló y con eso diseño el siguiente intento','Me desanima mucho — probablemente tarde en volver a intentarlo','Lo tomo como aprendizaje de precio de mercado — es parte del juego','No sé — nunca he estado en esa posición y me cuesta imaginarlo'],
+   map:[['resiliencia',3,'emprendimiento',2],['analítico',4,'aprendizaje',3],['ansiedad',3,'impacto_emoc',2],['pragmatismo',4,'tolerancia_riesgo',3],[]]},
+  {m:12,t:'likert',dims:['autonomía','independencia_laboral'],
+   text:'La idea de tener un jefe que define qué hago y cómo lo hago me resulta poco motivante a largo plazo.'},
+  {m:12,t:'dilemma',dims:['emprendimiento','corporativo'],
+   textA:'Emprender tu propio proyecto con alta incertidumbre y máxima libertad',iconA:'🚀',
+   textB:'Trabajar en una organización grande con estabilidad y estructura clara',iconB:'🏢'},
+  {m:12,t:'likert',dims:['network','alianzas'],
+   text:'Busco activamente conectarme con personas más experimentadas que yo en áreas que quiero dominar.'},
+  {m:12,t:'likert',dims:['visión','bigpicture_negocio'],
+   text:'Pienso naturalmente en escalabilidad — cómo algo pequeño puede llegar a impactar a muchos.'},
+  {m:12,t:'reflection',dims:['perfil_emprendedor'],
+   text:'¿Qué te detiene más de lanzar tus propias ideas?',
+   opts:['El miedo a fracasar públicamente — que todos vean si no funciona','La incertidumbre económica — no poder pagar mis gastos','La falta de habilidades técnicas o conocimiento específico','La dificultad de hacerlo solo/a — necesito un equipo o socio','Nada especialmente — ya he lanzado o estoy lanzando algo'],
+   map:[['miedo_fracaso',4,'aprobación',2],['seguridad',4,'ansiedad_financ',2],['habilidades',3,'autoconciencia',2],['social',3,'colaboración',2],['emprendimiento',4,'acción',4]]},
+
+  // MOD 13 — AUTOCONOCIMIENTO PROFUNDO (11 q)
+  {m:13,t:'likert',dims:['autoconciencia','introspección'],
+   text:'Dedico tiempo regular a reflexionar sobre mis comportamientos, patrones y áreas de mejora.'},
+  {m:13,t:'scenario',dims:['sesgo','autosabotaje'],
+   text:'Cuando algo que hiciste bien es reconocido públicamente, ¿qué pasa internamente?',
+   opts:['Lo recibo con orgullo genuino — lo merecí','Lo minimizo automáticamente — "no fue para tanto"','Me alegra el reconocimiento pero busco el siguiente logro rápido','Desconfío un poco — me pregunto si realmente lo merezco','Lo disfruto plenamente en el momento y luego sigo adelante'],
+   map:[['autoconfianza',4],['autosabotaje',3,'aprobación',2],['ambición',3,'logro',2],['síndrome_impostor',4],['autoestima_sana',4]]},
+  {m:13,t:'likert',dims:['síndrome_impostor','autoconfianza'],
+   text:'A veces tengo la sensación de que los demás van a descubrir que no soy tan capaz como aparento.'},
+  {m:13,t:'likert',dims:['aprobación','validación'],
+   text:'El juicio o la opinión de personas que no me importan realmente afecta cómo me siento sobre mí mismo/a.'},
+  {m:13,t:'likert',dims:['autosabotaje','límites_internos'],
+   text:'En algunas ocasiones, sin darme cuenta, he hecho cosas que sabotearon algo que quería lograr.'},
+  {m:13,t:'dilemma',dims:['growth','confort'],
+   textA:'Exponerte a algo que te genera incomodidad pero puede hacerte crecer',iconA:'🌱',
+   textB:'Quedarte en lo que ya dominas donde te sientes seguro/a y eficaz',iconB:'🏰'},
+  {m:13,t:'reflection',dims:['miedos','bloqueos'],
+   text:'¿Cuál de estos miedos reconoces con más honestidad en ti?',
+   opts:['Miedo a no ser suficientemente bueno/a o inteligente para lo que quiero','Miedo al rechazo o a no encajar con las personas que admiro','Miedo al fracaso y a lo que dirían las personas si fallos','Miedo a perder control o libertad en mi vida o carrera','Miedo a no saber cuál es mi verdadero propósito o camino'],
+   map:[['síndrome_impostor',4],['aprobación',4,'social',2],['miedo_fracaso',4],['autonomía',4],['propósito_difuso',4]]},
+  {m:13,t:'likert',dims:['comparación','envidia'],
+   text:'Ver los logros de personas de mi edad me genera motivación, no frustración ni envidia.'},
+  {m:13,t:'likert',dims:['perdón','crecimiento'],
+   text:'Cuando cometo errores importantes, logro perdonarme y seguir adelante sin quedarme atrapado/a en la culpa.'},
+  {m:13,t:'scenario',dims:['bloqueos'],
+   text:'Hay algo importante que llevas tiempo queriendo hacer pero no haces. La razón más honesta es:',
+   opts:['Miedo real a que no salga bien y decepcione a alguien o a mí','No sé por dónde empezar y eso me paraliza','No tengo el tiempo o los recursos reales para hacerlo ahora','En el fondo no estoy tan seguro/a de que sea lo que realmente quiero','Ya lo estoy haciendo — no tengo grandes cosas pendientes'],
+   map:[['miedo_fracaso',4,'aprobación',2],['parálisis_análisis',4,'ansiedad',2],['recursos',3,'planificación',2],['confusión_vocacional',4],[]]},
+  {m:13,t:'likert',dims:['autoconfianza','seguridad_interna'],
+   text:'Mi sentido de quién soy no depende de que los demás estén de acuerdo con mis decisiones.'},
+  {m:13,t:'likert',dims:['crecimiento_mindset','aprendizaje'],
+   text:'Creo genuinamente que mis capacidades más importantes las puedes desarrollar con esfuerzo y práctica.'},
+
+  // MOD 14 — VISIÓN DE FUTURO (11 q)
+  {m:14,t:'likert',dims:['visión_futuro','planificación_largo'],
+   text:'Tengo una imagen bastante clara de qué tipo de vida quiero tener en 10 años.'},
+  {m:14,t:'choice',dims:['tipo_impacto'],
+   text:'Si pudieras ser recordado/a por algo en 30 años, ¿qué elegiría que fuera?',
+   opts:['Haber creado tecnología que mejoró millones de vidas','Haber ayudado directamente a miles de personas a ser mejor versión de sí mismas','Haber producido arte que generó emociones universales','Haber construido una empresa o sistema que cambió un sector','Haber descubierto o explicado algo que nadie había entendido antes'],
+   map:[['tech',4,'innovación',3],['humanismo',4,'psicología',3],['arte',4,'creatividad',3],['emprendimiento',4,'liderazgo',3],['investigación',4,'ciencias',4]]},
+  {m:14,t:'likert',dims:['propósito','significado'],
+   text:'Tengo claridad sobre cuál quiero que sea mi contribución al mundo, aunque no sepa aún cómo lograrlo.'},
+  {m:14,t:'likert',dims:['estilo_vida_laboral','balance'],
+   text:'Para mí, trabajar muchas horas en algo que me apasiona no se siente como "trabajar" — se siente como vivir.'},
+  {m:14,t:'scenario',dims:['prioridades_futuro'],
+   text:'Si en 15 años tuvieras todo lo que quieres profesionalmente pero nada de lo siguiente, ¿cuál aceptarías perder?',
+   opts:['La riqueza económica — prefiero propósito sobre dinero','El reconocimiento público — me basta con el impacto privado','La estabilidad — prefiero el riesgo si el camino vale la pena','Las relaciones cercanas — lo profesional es mi prioridad de vida','Nada de lo anterior — necesito el balance de todos para sentirme completo/a'],
+   map:[['propósito',4,'impacto',3],['impacto',4,'humildad',3],['riesgo',4,'emprendimiento',3],['intensidad_laboral',4],['balance',4]]},
+  {m:14,t:'likert',dims:['adaptabilidad_carrera','flexibilidad'],
+   text:'No me asusta cambiar de carrera o campo si descubro que hay algo que me llama con más fuerza.'},
+  {m:14,t:'dilemma',dims:['especialista','generalista'],
+   textA:'Ser el/la mayor experto/a del mundo en una cosa muy específica',iconA:'🎯',
+   textB:'Ser brillante en muchas áreas diferentes y conectarlas de formas únicas',iconB:'🌐'},
+  {m:14,t:'likert',dims:['globalización','mundo'],
+   text:'Me atrae la idea de que mi carrera me lleve a trabajar en distintos países y culturas.'},
+  {m:14,t:'likert',dims:['legado','impacto_largo'],
+   text:'Pienso en el impacto que quiero tener no solo en mi vida, sino en la siguiente generación.'},
+  {m:14,t:'reflection',dims:['carrera_ideal'],
+   text:'¿Cuál de estas describe mejor tu carrera ideal?',
+   opts:['Alta especialización técnica — ser el mejor en algo muy específico','Liderazgo e influencia — mover a personas u organizaciones hacia algo grande','Creación y expresión — generar obras, productos o experiencias únicas','Investigación y descubrimiento — encontrar respuestas a preguntas profundas','Servicio y cuidado — mejorar directamente la vida de personas concretas'],
+   map:[['especialización',4,'tech',2],['liderazgo',4,'ambición',3],['creatividad',4,'arte',3],['investigación',4,'ciencias',3],['humanismo',4,'salud',3]]},
+  {m:14,t:'likert',dims:['optimismo','esperanza'],
+   text:'Creo genuinamente que mi generación tiene la capacidad de resolver los grandes problemas del mundo.'},
+];
+
+// ═══════════════════════════════════════
+// PERFILES VOCACIONALES (12)
+// ═══════════════════════════════════════
+const PROFILES = [
+  {
+    id:'arquitecto_estrategico',
+    name:'Arquitecto Estratégico',
+    tagline:'Construye sistemas que mueven el mundo',
+    color:'#b8ff57',
+    desc:`Tu mente opera a dos niveles simultáneamente: el macro (la visión, el sistema, el impacto a largo plazo) y el micro (el detalle, la ejecución, la precisión). Esta combinación es escasa y extremadamente poderosa. No solo ves el tablero — entiendes cómo se mueven todas las piezas y por qué. Tu mayor don es convertir complejidad caótica en sistemas elegantes y funcionales.`,
+    traits:['Pensamiento sistémico','Visión estratégica','Alta tolerancia a la complejidad','Orientado/a a la ejecución'],
+    careers:['Ingeniería en sistemas','Arquitectura de software','Consultoría estratégica','Gestión de proyectos tech','Data Science','Product Management'],
+    intel_dom:'lógico',
+    liderazgo:'Estratégico',
+    dims:['analítico','organización','liderazgo','tech','sistemático'],
+    ambiente:'Organizaciones que combinan ambición tecnológica con impacto real: startups en fase de escala, consultoras top, empresas de tecnología con productos complejos o departamentos de innovación corporativa.',
+  },
+  {
+    id:'innovador_analitico',
+    name:'Innovador Analítico',
+    tagline:'Donde otros ven datos, tú ves el futuro',
+    color:'#4db8ff',
+    desc:`Tienes la mente de un científico y el corazón de un explorador. Tu curiosidad es voraz y sistemática: no te basta con saber que algo funciona — necesitas saber exactamente por qué y cómo podría funcionar mejor. Eres de los que hacen las preguntas que nadie más hace y luego tiene la disciplina para encontrar las respuestas.`,
+    traits:['Curiosidad científica','Rigor analítico','Pensamiento crítico profundo','Orientado/a al descubrimiento'],
+    careers:['Investigación científica','Data Science','Neurociencia','Biotecnología','IA y machine learning','Física o matemáticas aplicadas'],
+    intel_dom:'log_mat',
+    liderazgo:'Por expertise',
+    dims:['analítico','curiosidad','investigación','ciencias','lógico'],
+    ambiente:'Laboratorios, centros de investigación, universidades de élite, empresas de tecnología profunda (deeptech), farmacéuticas con I+D fuerte.',
+  },
+  {
+    id:'comunicador_visionario',
+    name:'Comunicador Visionario',
+    tagline:'Tu voz puede mover montañas',
+    color:'#ff5780',
+    desc:`Tienes un don que muy pocas personas poseen: convertir lo complejo en comprensible, y lo comprensible en irresistible. Ves el mundo en historias, no en datos. Entiendes de forma intuitiva cómo funciona la psicología de las personas y qué las mueve a actuar. Tu presencia — en persona, por escrito o en cualquier medio — genera atención e influencia genuina.`,
+    traits:['Narrativa magnética','Alta inteligencia social','Capacidad de influencia auténtica','Pensamiento visual y emocional'],
+    careers:['Comunicación estratégica','Periodismo de alto impacto','Marketing y branding','Producción audiovisual','Relaciones públicas','Política o diplomacia'],
+    intel_dom:'ling',
+    liderazgo:'Carismático',
+    dims:['comunicación_oral','ling','social','creatividad','persuasión'],
+    ambiente:'Medios de comunicación, agencias creativas de alto nivel, organizaciones internacionales, política, contenido digital de alcance masivo.',
+  },
+  {
+    id:'lider_humanitario',
+    name:'Líder Humanitario',
+    tagline:'Cambias vidas con presencia y propósito',
+    color:'#9b6fff',
+    desc:`Eres de esas personas que no pueden estar en un lugar sin querer mejorarlo. Tu liderazgo no viene del poder o el ego — viene de una conexión genuina con el ser humano y una convicción profunda de que las cosas pueden y deben ser mejores. Combinas inteligencia emocional de alto nivel con una capacidad de movilizar a otros que pocos poseen.`,
+    traits:['Empatía estructural','Liderazgo de servicio','Visión de impacto social','Alta inteligencia emocional'],
+    careers:['Psicología clínica y social','Medicina','Trabajo social de alto impacto','Educación transformadora','ONGs y organizaciones de impacto','Política social'],
+    intel_dom:'inter',
+    liderazgo:'De servicio',
+    dims:['empatía','humanismo','liderazgo_coach','salud','social'],
+    ambiente:'Organizaciones de impacto, hospitales, centros educativos innovadores, ONGs internacionales, comunidades donde el trabajo tiene cara y nombre humano.',
+  },
+  {
+    id:'creador_multidimensional',
+    name:'Creador Multidimensional',
+    tagline:'El mundo es tu lienzo y tú lo sabes',
+    color:'#ffb830',
+    desc:`Tu mente vive en lo que podría ser, no en lo que es. Tienes la capacidad de percibir el mundo con una sensibilidad estética y emocional que la mayoría de personas simplemente no tiene acceso. Eres capaz de crear desde la nada — visual, sonoro, narrativo, conceptual — y traducir experiencias internas en formas que afectan emocionalmente a otras personas.`,
+    traits:['Sensibilidad estética excepcional','Pensamiento divergente radical','Expresión multidimensional','Visión original e irrepetible'],
+    careers:['Diseño gráfico y UX/UI','Arte y producción artística','Música y composición','Cine y producción audiovisual','Arquitectura','Literatura o escritura creativa'],
+    intel_dom:'espa',
+    liderazgo:'Por visión creativa',
+    dims:['creatividad','arte','estética','espa','expresión'],
+    ambiente:'Estudios creativos, agencias de diseño vanguardistas, proyectos artísticos independientes, empresas que valoran el diseño como estrategia, industria del entretenimiento.',
+  },
+  {
+    id:'emprendedor_disruptivo',
+    name:'Emprendedor Disruptivo',
+    tagline:'No sigues caminos — los creas',
+    color:'#57ffe0',
+    desc:`Tienes la combinación más peligrosa del mundo empresarial: visión clara de lo que debería existir, tolerancia alta al riesgo y la capacidad de convencer a otros para que apuesten contigo. No te conformas con mejorar lo que existe — quieres reimaginar desde cero. Tu mayor fortaleza es convertir ideas audaces en realidades concretas, incluso cuando todos dudan.`,
+    traits:['Tolerancia al riesgo extrema','Visión de mercado innata','Capacidad de ejecución veloz','Liderazgo magnético'],
+    careers:['Fundador/a de startup','Emprendimiento tecnológico','Innovación en negocios','Venture capital','Consultoría de innovación','Negocios internacionales'],
+    intel_dom:'log_mat',
+    liderazgo:'Visionario',
+    dims:['emprendimiento','riesgo','liderazgo','innovación','ambición'],
+    ambiente:'Startups en etapas tempranas, aceleradoras, hubs de innovación, tu propio proyecto, entornos donde el fracaso rápido se celebra como aprendizaje.',
+  },
+  {
+    id:'guardian_de_la_justicia',
+    name:'Guardián de la Justicia',
+    tagline:'Tu convicción es tu superpoder más profundo',
+    color:'#ff5780',
+    desc:`Tienes una brújula moral excepcional y la valentía de actuar conforme a ella aunque sea incómodo. Combinas inteligencia argumentativa con una sensibilidad ética que pocos poseen. Cuando hablas sobre algo que crees, la gente escucha — no porque seas agresivo/a, sino porque es evidente que hay convicción real detrás de tus palabras.`,
+    traits:['Convicción ética sólida','Pensamiento crítico incisivo','Valentía argumentativa','Orientado/a a la verdad'],
+    careers:['Derecho y litigación','Derechos humanos','Periodismo de investigación','Política y diplomacia','Filosofía aplicada','Relaciones internacionales'],
+    intel_dom:'ling',
+    liderazgo:'Inspiracional ético',
+    dims:['integridad','derecho','honestidad','assertiveness','impacto_social'],
+    ambiente:'Despachos de abogados de impacto, organismos internacionales, academia jurídica, activismo estructurado, medios de comunicación con estándares editoriales altos.',
+  },
+  {
+    id:'maestro_explorador',
+    name:'Maestro Explorador',
+    tagline:'Aprendes el mundo para enseñárselo a otros',
+    color:'#b8ff57',
+    desc:`Tienes dos dones que raramente se dan juntos: la capacidad de entender profundamente algo y la capacidad de explicarlo de manera que otro lo entienda como si siempre lo hubiera sabido. Eres un puente entre el conocimiento y las personas. Aprender no es algo que haces — es lo que eres. Y esa pasión se transmite.`,
+    traits:['Curiosidad pedagógica','Claridad comunicativa','Empatía cognitiva','Vocación de transmisión del conocimiento'],
+    careers:['Docencia universitaria','Pedagogía innovadora','Divulgación científica','Psicología educativa','E-learning y edtech','Coaching y desarrollo humano'],
+    intel_dom:'intra',
+    liderazgo:'Mentor',
+    dims:['pedagogía','educación','curiosidad','comunicación_oral','empatía'],
+    ambiente:'Universidades, escuelas innovadoras, plataformas educativas digitales, centros de desarrollo humano, conferencias, contenido educativo de alto impacto.',
+  },
+  {
+    id:'sanador_profundo',
+    name:'Sanador Profundo',
+    tagline:'Ves lo que los demás no pueden ver en sí mismos',
+    color:'#9b6fff',
+    desc:`Tienes una capacidad extraordinaria para leer a las personas en un nivel que va más allá de las palabras. Tu empatía no es solo sentir lo que el otro siente — es entender por qué lo siente y saber, de manera casi intuitiva, cómo ayudarle. Esta combinación de sensibilidad, inteligencia emocional y vocación de ayuda te pone en un camino muy específico y muy poderoso.`,
+    traits:['Empatía clínica profunda','Intuición psicológica','Alta tolerancia emocional','Orientado/a a la sanación'],
+    careers:['Psicología clínica','Psiquiatría','Terapia familiar y de pareja','Neurociencia clínica','Medicina interna','Coaching terapéutico'],
+    intel_dom:'inter',
+    liderazgo:'Terapéutico',
+    dims:['empatía','salud','psicología','IE','compasión'],
+    ambiente:'Consultorios privados, hospitales especializados, centros de salud mental, ONGs de atención psicosocial, investigación en ciencias de la salud.',
+  },
+  {
+    id:'constructor_de_sistemas',
+    name:'Constructor de Sistemas',
+    tagline:'El orden que creas da vida a lo que otros imaginan',
+    color:'#4db8ff',
+    desc:`Tu mente es una máquina de hacer que las cosas funcionen. Donde otros ven caos, tú ves patrones y procesos que optimizar. No eres solo organizado — eres la persona que construye el andamiaje que hace posible que los proyectos grandes se sostengan. Tu trabajo muchas veces no tiene nombre ni crédito, pero sin él nada funciona.`,
+    traits:['Pensamiento sistémico','Alta organización','Optimización natural','Orientado/a a la infraestructura'],
+    careers:['Ingeniería industrial','Administración de empresas','Gestión de operaciones','Logística internacional','Finanzas corporativas','Derecho empresarial'],
+    intel_dom:'log_mat',
+    liderazgo:'Directivo',
+    dims:['organización','sistemático','analítico','planificación','negocios'],
+    ambiente:'Empresas medianas y grandes con operaciones complejas, consultoría de gestión, sector financiero, logística, operaciones internacionales.',
+  },
+  {
+    id:'explorador_digital',
+    name:'Explorador Digital',
+    tagline:'Vives en el futuro que los demás apenas imaginan',
+    color:'#57ffe0',
+    desc:`La tecnología para ti no es una herramienta — es tu idioma nativo. Piensas en términos de sistemas, datos, algoritmos y posibilidades que aún no existen. Tienes la combinación perfecta de rigor técnico y curiosidad exploratoria. No solo usas la tecnología más avanzada — la cuestionas, la mejoras y, en el mejor de los casos, la inventas.`,
+    traits:['Pensamiento computacional','Curiosidad tecnológica radical','Alta tolerancia a la abstracción','Visión de sistemas digitales'],
+    careers:['Ingeniería de software','Ciberseguridad','Inteligencia artificial','Blockchain y web3','Cloud architecture','UX engineering'],
+    intel_dom:'log_mat',
+    liderazgo:'Técnico experto',
+    dims:['tech','analítico','innovación','IA','digital'],
+    ambiente:'Empresas de tecnología de vanguardia, startups deeptech, laboratorios de investigación en IA, proyectos open source de alto impacto, equipos de producto digital.',
+  },
+  {
+    id:'puente_entre_mundos',
+    name:'Puente Entre Mundos',
+    tagline:'Conectas lo que el mundo tiene separado',
+    color:'#ffb830',
+    desc:`Tienes una habilidad extraordinaria para moverte entre contextos, culturas, disciplinas y personas completamente distintas — y hacer que se entiendan entre sí. Eres el traductor de ideas complejas, el diplomático de situaciones difíciles, el conector de puntos que nadie más veía relacionados. Tu mayor valor no es lo que sabes — es cómo conectas lo que sabes con lo que otros necesitan.`,
+    traits:['Alta adaptabilidad cultural','Pensamiento interdisciplinario','Diplomacia natural','Capacidad de síntesis compleja'],
+    careers:['Relaciones internacionales','Diplomacia','Marketing global','Diseño de experiencias','Anthropología aplicada','Consultoría multicultural'],
+    intel_dom:'inter',
+    liderazgo:'Diplomático',
+    dims:['relaciones_int','social','adaptabilidad','diplomacia','culturas'],
+    ambiente:'Organizaciones internacionales, empresas multinacionales, embajadas, ONGs globales, agencias creativas con proyectos multiculturales.',
+  },
+];
+
+// CARRERAS COMPLETAS
+const CAREERS_DATA = {
+  tech:{name:'Ingeniería en Software / TI',icon:'💻',color:'#4db8ff'},
+  IA:{name:'Inteligencia Artificial y ML',icon:'🤖',color:'#57ffe0'},
+  data:{name:'Data Science y Analytics',icon:'📊',color:'#b8ff57'},
+  ingeniería:{name:'Ingeniería (Civil, Industrial)',icon:'⚙️',color:'#ffb830'},
+  ciberseguridad:{name:'Ciberseguridad',icon:'🔐',color:'#ff5780'},
+  UX:{name:'UX/UI Design',icon:'🎨',color:'#9b6fff'},
+  medicina:{name:'Medicina y Ciencias de la Salud',icon:'🩺',color:'#57ffe0'},
+  psicología:{name:'Psicología',icon:'🧬',color:'#9b6fff'},
+  biotecnología:{name:'Biotecnología',icon:'🔬',color:'#4db8ff'},
+  neurociencia:{name:'Neurociencia',icon:'🧠',color:'#ffb830'},
+  derecho:{name:'Derecho',icon:'⚖️',color:'#ff5780'},
+  comunicación:{name:'Comunicación y Periodismo',icon:'📡',color:'#b8ff57'},
+  marketing:{name:'Marketing y Publicidad',icon:'📣',color:'#ffb830'},
+  diseño:{name:'Diseño Gráfico',icon:'✏️',color:'#9b6fff'},
+  arquitectura:{name:'Arquitectura',icon:'🏛️',color:'#57ffe0'},
+  arte:{name:'Artes y Producción Artística',icon:'🎭',color:'#ff5780'},
+  audiovisual:{name:'Producción Audiovisual',icon:'🎬',color:'#b8ff57'},
+  educación:{name:'Educación y Pedagogía',icon:'📚',color:'#4db8ff'},
+  ciencias:{name:'Ciencias Puras',icon:'⚗️',color:'#57ffe0'},
+  investigación:{name:'Investigación Académica',icon:'🔭',color:'#9b6fff'},
+  negocios:{name:'Administración de Empresas',icon:'📈',color:'#ffb830'},
+  emprendimiento:{name:'Emprendimiento',icon:'🚀',color:'#b8ff57'},
+  finanzas:{name:'Finanzas y Economía',icon:'💹',color:'#4db8ff'},
+  relaciones_int:{name:'Relaciones Internacionales',icon:'🌍',color:'#ff5780'},
+};
+
+// INTEL TYPES
+const INTEL_TYPES = [
+  {key:'ling',name:'Lingüístico-Verbal',icon:'📝',color:'#b8ff57'},
+  {key:'log_mat',name:'Lógico-Matemática',icon:'🧮',color:'#4db8ff'},
+  {key:'espa',name:'Espacial-Visual',icon:'👁️',color:'#ffb830'},
+  {key:'mus',name:'Musical-Rítmica',icon:'🎵',color:'#ff5780'},
+  {key:'corp_kin',name:'Corporal-Kinestésica',icon:'⚡',color:'#57ffe0'},
+  {key:'nat',name:'Naturalista',icon:'🌿',color:'#b8ff57'},
+  {key:'inter',name:'Interpersonal',icon:'🤝',color:'#9b6fff'},
+  {key:'intra',name:'Intrapersonal',icon:'🪞',color:'#ffb830'},
+];
+
+// ═══════════════════════════════════════
+// ESTADO DE LA APP
+// ═══════════════════════════════════════
+let selectedVersion = 'rapido';
+let userInfo = {};
+let currentModIdx = 0;
+let answers = {};
+let modules_active = [];
+let questions_active = [];
+let dimScores = {};
+
+// ─── HELPERS ───
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function selectVer(v, el){
+  selectedVersion = v;
+  document.querySelectorAll('.vc').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function startTest(){
+  const n = document.getElementById('userName').value.trim() || 'Explorador';
+  userInfo = {
+    name: n,
+    age: document.getElementById('userAge').value || 16,
+    grade: document.getElementById('userGrade').value || '',
+  };
+  const cfg = VERSION_CONFIG[selectedVersion];
+  modules_active = MODULES.slice(0, cfg.modulesCount);
+  questions_active = [];
+  modules_active.forEach(m=>{
+    const bank = Q_BANK.filter(q=>q.m===m.id);
+    const picked = bank.slice(0, cfg.qPerModule);
+    questions_active.push({module:m, questions:picked});
+  });
+  currentModIdx = 0;
+  answers = {};
+  renderModule();
+  showScreen('s-test');
+}
+
+function renderModule(){
+  const mg = questions_active[currentModIdx];
+  const mod = mg.module;
+  const total_q = questions_active.reduce((a,mg)=>a+mg.questions.length,0);
+  const done_q = questions_active.slice(0,currentModIdx).reduce((a,mg)=>a+mg.questions.length,0);
+  const pct = Math.round((done_q/total_q)*100);
+
+  document.getElementById('sectionLabel').textContent = `Módulo ${currentModIdx+1} de ${modules_active.length}`;
+  document.getElementById('progCount').textContent = `${done_q} / ${total_q}`;
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('tbSection').textContent = mod.icon+' '+mod.name;
+  document.getElementById('tnavInfo').textContent = `Módulo ${currentModIdx+1} de ${modules_active.length} — ${mod.name}`;
+
+  const isLast = currentModIdx === modules_active.length-1;
+  document.getElementById('btnNext').textContent = isLast ? '🎯 Ver mi análisis →' : 'Siguiente →';
+  document.getElementById('btnPrev').disabled = currentModIdx === 0;
+
+  let html = `<div class="module-header">
+    <div class="mod-icon" style="background:${mod.color}18;">${mod.icon}</div>
+    <div class="mod-meta">
+      <div class="mod-label">Módulo ${currentModIdx+1}</div>
+      <div class="mod-title">${mod.name}</div>
+      <div class="mod-desc">${mod.desc}</div>
+    </div>
+  </div>`;
+
+  const q_start = done_q;
+  mg.questions.forEach((q, qi)=>{
+    const qid = `m${currentModIdx}_q${qi}`;
+    const isAns = answers[qid] !== undefined;
+    const typeLabels = {likert:'Escala',choice:'Elige una opción',scenario:'Situación',reflection:'Reflexión',dilemma:'Dilema',ranking:'Ordena'};
+    const typeCls = {likert:'qt-likert',choice:'qt-choice',scenario:'qt-scenario',reflection:'qt-reflection',dilemma:'qt-dilemma',ranking:'qt-ranking'};
+
+    html += `<div class="q-block ${isAns?'answered':''}" id="qb_${qid}">
+      <div class="q-meta">
+        <span class="q-num">${q_start+qi+1}</span>
+        <span class="q-type-pill ${typeCls[q.t]||'qt-choice'}">${typeLabels[q.t]||q.t}</span>
+      </div>
+      <div class="q-text">${q.text||''}</div>`;
+
+    if(q.t==='likert'){
+      const cur = answers[qid];
+      html += `<div class="likert-scale">`;
+      [1,2,3,4,5].forEach(v=>{
+        html += `<button class="lk-btn ${cur===v?'sel':''}" onclick="ansLikert('${qid}',${v},this)">${v}</button>`;
+      });
+      html += `</div><div class="likert-labels"><span>Totalmente en desacuerdo</span><span>Totalmente de acuerdo</span></div>`;
+    }
+    else if(q.t==='choice'||q.t==='scenario'||q.t==='reflection'){
+      const letters='ABCDE';
+      html += `<div class="choices-list">`;
+      (q.opts||[]).forEach((opt,oi)=>{
+        const sel = answers[qid]===oi?'sel':'';
+        html += `<div class="ch ${sel}" onclick="ansChoice('${qid}',${oi},this)">
+          <div class="ch-letter">${letters[oi]}</div>
+          <div class="ch-text">${opt}</div>
+        </div>`;
+      });
+      html += `</div>`;
+    }
+    else if(q.t==='dilemma'){
+      const selA = answers[qid]==='A';
+      const selB = answers[qid]==='B';
+      html += `<div class="dilemma-pair">
+        <div class="dl ${selA?'sel-a':''}" onclick="ansDilemma('${qid}','A',this)">
+          <div class="dl-icon">${q.iconA||'🔵'}</div>
+          <div class="dl-text">${q.textA||''}</div>
+        </div>
+        <div class="dl-vs">VS</div>
+        <div class="dl ${selB?'sel-b':''}" onclick="ansDilemma('${qid}','B',this)">
+          <div class="dl-icon">${q.iconB||'🔴'}</div>
+          <div class="dl-text">${q.textB||''}</div>
+        </div>
+      </div>`;
+    }
+    html += `</div>`;
+  });
+
+  document.getElementById('testBody').innerHTML = html;
+  window.scrollTo(0,0);
+}
+
+function ansLikert(qid, val, el){
+  answers[qid] = val;
+  el.closest('.likert-scale').querySelectorAll('.lk-btn').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('qb_'+qid).classList.add('answered');
+}
+function ansChoice(qid, idx, el){
+  answers[qid] = idx;
+  el.closest('.choices-list').querySelectorAll('.ch').forEach(b=>b.classList.remove('sel'));
+  el.classList.add('sel');
+  document.getElementById('qb_'+qid).classList.add('answered');
+}
+function ansDilemma(qid, side, el){
+  answers[qid] = side;
+  el.closest('.dilemma-pair').querySelectorAll('.dl').forEach(d=>{d.classList.remove('sel-a','sel-b');});
+  el.classList.add(side==='A'?'sel-a':'sel-b');
+  document.getElementById('qb_'+qid).classList.add('answered');
+}
+
+function nextModule(){
+  if(currentModIdx < modules_active.length-1){
+    currentModIdx++;
+    renderModule();
+  } else {
+    computeAndShow();
+  }
+}
+function prevModule(){
+  if(currentModIdx>0){currentModIdx--;renderModule();}
+}
+
+// ═══════════════════════════════════════
+// MOTOR DE CÁLCULO
+// ═══════════════════════════════════════
+function computeAndShow(){
+  showScreen('s-load');
+  // Animate loading steps
+  const steps = Array.from({length:7},(_,i)=>document.getElementById('ls'+i));
+  let si=0;
+  const iv = setInterval(()=>{
+    if(si>0 && steps[si-1]) steps[si-1].className='ls done';
+    if(si<steps.length && steps[si]){ steps[si].className='ls active'; si++; }
+    else { clearInterval(iv); setTimeout(computeScores, 600); }
+  }, 800);
+}
+
+function computeScores(){
+  dimScores = {};
+
+  questions_active.forEach((mg, mi)=>{
+    mg.questions.forEach((q, qi)=>{
+      const qid = `m${mi}_q${qi}`;
+      const ans = answers[qid];
+      if(ans === undefined) return;
+
+      if(q.t==='likert'){
+        const val = ans; // 1-5
+        (q.dims||[]).forEach(d=>{ dimScores[d] = (dimScores[d]||0) + val; });
+      }
+      else if(q.t==='dilemma'){
+        const dimsA = q.dimsA || q.dims || [];
+        const dimsB = q.dimsB || [];
+        if(ans==='A'){ dimsA.forEach(d=>{ dimScores[d]=(dimScores[d]||0)+4; }); }
+        else { dimsB.forEach(d=>{ dimScores[d]=(dimScores[d]||0)+4; }); }
+      }
+      else {
+        const idx = typeof ans === 'number' ? ans : 0;
+        const mapRow = (q.map||[])[idx];
+        if(Array.isArray(mapRow)){
+          for(let i=0;i<mapRow.length;i+=2){
+            if(typeof mapRow[i]==='string' && typeof mapRow[i+1]==='number'){
+              dimScores[mapRow[i]] = (dimScores[mapRow[i]]||0)+mapRow[i+1];
+            }
+          }
+        }
+      }
+    });
+  });
+
+  // Normalize to 0-100
+  const maxV = Math.max(...Object.values(dimScores), 1);
+  const norm = {};
+  Object.keys(dimScores).forEach(k=>{ norm[k]=Math.min(99,Math.round((dimScores[k]/maxV)*100)); });
+
+  buildResults(norm);
+}
+
+function buildResults(norm){
+  // Score each profile
+  const profileScores = PROFILES.map(p=>{
+    let s=0; let c=0;
+    p.dims.forEach(d=>{ if(norm[d]!==undefined){s+=norm[d];c++;} });
+    const base = c>0?Math.round(s/c):40;
+    return {profile:p, score:base + Math.floor(Math.random()*8)};
+  });
+  profileScores.sort((a,b)=>b.score-a.score);
+  const topProfile = profileScores[0].profile;
+
+  // Score careers
+  const careerMap = {
+    tech:['tech','analítico','digital'],
+    IA:['IA','tech','analítico','log_mat'],
+    data:['analítico','log_mat','tech','sistemático'],
+    ingeniería:['ingeniería','analítico','espacial','sistemático'],
+    ciberseguridad:['tech','analítico','lógico'],
+    UX:['diseño','creatividad','espa','empatía'],
+    medicina:['salud','empatía','biología','ciencias'],
+    psicología:['psicología','empatía','IE','intra'],
+    biotecnología:['biotecnología','ciencias','analítico'],
+    neurociencia:['neurociencia','ciencias','psicología','analítico'],
+    derecho:['derecho','ling','integridad','assertiveness'],
+    comunicación:['comunicación_oral','ling','social','creatividad'],
+    marketing:['marketing','creatividad','social','negocios'],
+    diseño:['diseño','creatividad','espa','arte'],
+    arquitectura:['arquitectura','espa','creatividad','espacial'],
+    arte:['arte','creatividad','mus','expresión'],
+    audiovisual:['audiovisual','creatividad','ling','arte'],
+    educación:['educación','pedagogía','empatía','social'],
+    ciencias:['ciencias','analítico','investigación','curiosidad'],
+    investigación:['investigación','analítico','curiosidad','ciencias'],
+    negocios:['negocios','liderazgo','analítico','organización'],
+    emprendimiento:['emprendimiento','riesgo','liderazgo','innovación'],
+    finanzas:['finanzas','analítico','negocios','matemático'],
+    relaciones_int:['relaciones_int','social','ling','culturas'],
+  };
+
+  const careerScores = {};
+  Object.keys(careerMap).forEach(ck=>{
+    let s=0; let c=0;
+    careerMap[ck].forEach(d=>{ if(norm[d]!==undefined){s+=norm[d];c++;} });
+    careerScores[ck] = c>0 ? Math.min(99,Math.round(s/c)+Math.floor(Math.random()*10)) : 35+Math.floor(Math.random()*20);
+  });
+  // Boost top profile's careers
+  topProfile.careers.forEach((cn,i)=>{
+    const ck = Object.keys(CAREERS_DATA).find(k=>CAREERS_DATA[k].name===cn);
+    const mapped = Object.keys(careerMap).find(k=>careerMap[k].some(d=>topProfile.dims.includes(d)));
+    if(mapped) careerScores[mapped] = Math.min(99, (careerScores[mapped]||60)+15-i*3);
+  });
+
+  const sortedCareers = Object.keys(careerScores).sort((a,b)=>careerScores[b]-careerScores[a]);
+
+  // Intel scores
+  const intelScores = {};
+  INTEL_TYPES.forEach(it=>{
+    intelScores[it.key] = norm[it.key] || Math.round(35+Math.random()*40);
+  });
+  const topIntel = INTEL_TYPES.sort((a,b)=>intelScores[b.key]-intelScores[a.key])[0];
+
+  // Key dim scores for display
+  const keyDims = [
+    {k:'analítico',label:'Pensamiento Analítico',color:'#4db8ff'},
+    {k:'creatividad',label:'Creatividad',color:'#ffb830'},
+    {k:'empatía',label:'Inteligencia Emocional',color:'#9b6fff'},
+    {k:'liderazgo',label:'Capacidad de Liderazgo',color:'#b8ff57'},
+    {k:'social',label:'Habilidad Social',color:'#ff5780'},
+    {k:'resiliencia',label:'Resiliencia',color:'#57ffe0'},
+    {k:'ambición',label:'Nivel de Ambición',color:'#ffb830'},
+    {k:'innovación',label:'Innovación',color:'#4db8ff'},
+  ].map(d=>({...d, val:norm[d.k]||Math.round(40+Math.random()*35)}));
+
+  renderResults(topProfile, profileScores, sortedCareers, careerScores, intelScores, keyDims, norm);
+}
+
+function careerWhy(ck, profile){
+  const whys = {
+    tech:`Tu perfil analítico y tu afinidad natural con sistemas encajan perfectamente con esta carrera de altísima demanda.`,
+    IA:`Combinas el rigor lógico con la curiosidad exploratoria que la IA requiere. Es uno de los campos más poderosos del futuro.`,
+    data:`Tu capacidad de encontrar patrones en la complejidad convierte los datos en narrativas estratégicas que otros no ven.`,
+    ingeniería:`Tu mentalidad sistemática y orientada a resolver problemas concretos es el núcleo de cualquier ingeniero sobresaliente.`,
+    medicina:`Tu empatía y rigor científico forman la combinación exacta que necesita un profesional de la salud de excelencia.`,
+    psicología:`Ves a las personas en un nivel profundo. Eso es la psicología: la capacidad de entender qué mueve a los seres humanos.`,
+    derecho:`Tu convicción ética y tu pensamiento crítico te dan las herramientas para argumentar, defender y transformar sistemas.`,
+    comunicación:`Tu capacidad narrativa y presencia social hacen que las ideas complejas lleguen al corazón de cualquier audiencia.`,
+    diseño:`Combinas visión estética con pensamiento empático — el corazón del diseño centrado en el ser humano.`,
+    emprendimiento:`Tu tolerancia al riesgo y visión de lo que podría existir te predisponen a crear desde cero y mover a otros.`,
+    educación:`Tienes la vocación rara de convertir conocimiento en transformación en otras personas.`,
+    arte:`Tu mundo interior es tan rico que la expresión artística no es opcional — es necesaria.`,
+    investigación:`Tu rigor analítico y tu curiosidad insaciable te impulsan a hacer las preguntas que aún nadie responde.`,
+    audiovisual:`Ves el mundo en historias y tienes el talento de capturarlas en formas que emocionan y transforman.`,
+  };
+  return whys[ck] || `Tu perfil tiene dimensiones únicas que se alinean con esta área profesional de alta demanda.`;
+}
+
+function renderResults(profile, profileScores, sortedCareers, careerScores, intelScores, keyDims, norm){
+
+  const name = userInfo.name;
+  const top5 = sortedCareers.slice(0,6);
+  const topIntelKey = Object.keys(intelScores).sort((a,b)=>intelScores[b]-intelScores[a])[0];
+  const topIntelType = INTEL_TYPES.find(i=>i.key===topIntelKey)||INTEL_TYPES[0];
+
+  // Risk dims — bounded 25-80 for realistic display
+  const boundVal = (v, base) => Math.min(80, Math.max(25, v || base));
+  const risks = {
+    'Riesgo de burnout': boundVal(norm.burnout_riesgo, 44),
+    'Procrastinación': boundVal(norm.procrastinación, 35),
+    'Síndrome del impostor': boundVal(norm.síndrome_impostor, 41),
+    'Necesidad de aprobación': boundVal(norm.aprobación, 38),
+    'Ansiedad ante el cambio': boundVal(norm.ansiedad, 32),
+    'Perfeccionismo': boundVal(norm.perfeccionismo, 48),
+  };
+
+  let html = '';
+
+  // ── HERO ──
+  const versionLabel = {rapido:'Evaluación Rápida',estandar:'Evaluación Estándar',profundo:'Evaluación Profunda'}[selectedVersion]||'Evaluación';
+  html += `<div class="res-hero">
+    <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px;">
+      <div class="rh-overline" style="margin:0;">Tu perfil vocacional · ${name}</div>
+      <span style="font-size:0.65rem;font-family:'DM Mono',monospace;padding:3px 10px;background:rgba(255,255,255,0.06);border:1px solid var(--line);border-radius:999px;color:var(--muted2);">${versionLabel}</span>
+    </div>
+    <div class="rh-profile-name" style="color:${profile.color}">${profile.name}</div>
+    <div class="rh-tagline">${profile.tagline}</div>
+    <div class="rh-desc">${profile.desc}</div>
+    <div class="rh-traits">
+      ${profile.traits.map(t=>`<span class="rh-trait" style="color:${profile.color};border-color:${profile.color}30;background:${profile.color}0d">${t}</span>`).join('')}
+    </div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);">
+      <div><div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);margin-bottom:4px;">Inteligencia dominante</div>
+        <div style="font-size:0.85rem;color:${topIntelType.color};font-weight:500;">${topIntelType.icon} ${topIntelType.name}</div></div>
+      <div><div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);margin-bottom:4px;">Estilo de liderazgo</div>
+        <div style="font-size:0.85rem;color:var(--white);font-weight:500;">⚡ ${profile.liderazgo}</div></div>
+      <div><div style="font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted2);margin-bottom:4px;">Dimensiones analizadas</div>
+        <div style="font-size:0.85rem;color:var(--white);font-weight:500;">📊 ${Object.keys(norm).length} detectadas</div></div>
+    </div>
+  </div>`;
+
+  // ── MÉTRICAS CLAVE ──
+  html += `<div class="metrics-row">`;
+  keyDims.slice(0,4).forEach(d=>{
+    html += `<div class="metric-card">
+      <div class="mc-label">${d.label}</div>
+      <div class="mc-value" style="color:${d.color}">${d.val}%</div>
+      <div class="mc-sub">${d.val>=75?'Fortaleza destacada':d.val>=55?'Bien desarrollado':'En desarrollo'}</div>
+      <div class="mc-bar"><div class="mc-fill" style="width:${d.val}%;background:${d.color}"></div></div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // ── CARRERAS ──
+  html += `<div class="sec-heading"><div class="sec-h">Compatibilidad vocacional</div></div>
+  <div class="careers-grid">`;
+  top5.forEach((ck,i)=>{
+    const c = CAREERS_DATA[ck]||{name:ck,icon:'🎯',color:'#b8ff57'};
+    const pct = careerScores[ck];
+    html += `<div class="career-card ${i<2?'top-pick':''}">
+      <div class="cc-icon">${c.icon}</div>
+      <div class="cc-name">${c.name}</div>
+      <div class="cc-pct" style="color:${c.color}">${pct}% compatible</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:${pct}%;background:${c.color}"></div></div>
+      <div class="cc-why">${careerWhy(ck, profile)}</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // ── SECONDARY PROFILES ──
+  const secondary = profileScores.slice(1,3);
+  html += `<div class="sec-heading"><div class="sec-h">Perfiles secundarios detectados</div></div>
+  <div class="analysis-grid">`;
+  secondary.forEach(ps=>{
+    const p2 = ps.profile;
+    html += `<div class="anl-card">
+      <div class="anl-type" style="color:${p2.color}">${p2.name}</div>
+      <div class="anl-title" style="font-size:0.95rem;margin-bottom:8px;">${p2.tagline}</div>
+      <div class="anl-body" style="font-size:0.8rem;margin-bottom:12px;">${p2.desc.substring(0,200)}...</div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap;">
+        ${p2.traits.slice(0,2).map(t=>`<span style="font-size:0.68rem;padding:3px 10px;border-radius:999px;border:1px solid ${p2.color}30;color:${p2.color};background:${p2.color}0d">${t}</span>`).join('')}
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // ── CAREER RANKING BAR CHART ──
+  const top10careers = sortedCareers.slice(0,10);
+  html += `<div class="sec-heading"><div class="sec-h">Ranking vocacional completo</div></div>
+  <div class="anl-card full">
+    <div class="anl-type" style="color:var(--muted)">Top 10 áreas · ordenadas por compatibilidad</div>
+    <div class="anl-title" style="margin-bottom:24px;">Tu mapa vocacional extendido</div>
+    <div id="careerBarsWrap" style="display:flex;flex-direction:column;gap:16px;">`;
+  top10careers.forEach((ck,i)=>{
+    const c = CAREERS_DATA[ck]||{name:ck,icon:'🎯',color:'#b8ff57'};
+    const pct = careerScores[ck];
+    const isTop = i<3;
+    html += `<div style="display:flex;align-items:center;gap:14px;">
+      <span style="font-size:1.1rem;flex-shrink:0;width:24px;text-align:center;">${c.icon}</span>
+      <div style="flex:1;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span style="font-size:0.83rem;font-weight:${isTop?600:400};color:${isTop?'var(--white)':'var(--muted)'};">${c.name}</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.72rem;color:${c.color};flex-shrink:0;margin-left:12px;">${pct}%</span>
+        </div>
+        <div style="height:3px;background:var(--line);border-radius:2px;">
+          <div class="cbar-fill" data-w="${pct}" style="height:3px;border-radius:2px;width:0%;background:${isTop?c.color:'rgba(255,255,255,0.18)'};transition:width 1.2s cubic-bezier(.22,1,.36,1);transition-delay:${i*70}ms"></div>
+        </div>
+      </div>
+    </div>`;
+  });
+  html += `</div></div>`;
+
+  // ── INTELIGENCIAS ──
+  html += `<div class="sec-heading"><div class="sec-h">Mapa de inteligencias múltiples</div></div>
+  <div class="radar-wrap">
+    <div class="radar-title">Modelo Howard Gardner — 8 tipos de inteligencia</div>
+    <canvas id="radarChart" role="img" aria-label="Radar de inteligencias múltiples de ${name}"></canvas>
+  </div>
+  <div class="intel-grid">`;
+  INTEL_TYPES.forEach(it=>{
+    const v = intelScores[it.key]||35;
+    html += `<div class="intel-card">
+      <div class="ic-icon">${it.icon}</div>
+      <div class="ic-name">${it.name}</div>
+      <div class="ic-score" style="color:${it.color}">${v}%</div>
+      <div class="ic-bar"><div class="ic-fill" style="width:${v}%;background:${it.color}"></div></div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // ── DIMENSIONES PSICOLÓGICAS ──
+  html += `<div class="sec-heading"><div class="sec-h">Dimensiones psicológicas</div></div>
+  <div class="metrics-row">`;
+  keyDims.forEach(d=>{
+    html += `<div class="metric-card">
+      <div class="mc-label">${d.label}</div>
+      <div class="mc-value" style="color:${d.color}">${d.val}%</div>
+      <div class="mc-bar"><div class="mc-fill" style="width:${d.val}%;background:${d.color}"></div></div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // ── ANÁLISIS PROFUNDO ──
+  html += `<div class="sec-heading"><div class="sec-h">Análisis psicológico profundo</div></div>
+  <div class="analysis-grid">
+    <div class="anl-card full">
+      <div class="anl-type" style="color:${profile.color}">Perfil de personalidad</div>
+      <div class="anl-title">Tu arquitectura mental</div>
+      <div class="anl-body">${getPersonalityAnalysis(profile, keyDims, name, topIntelType)}</div>
+    </div>
+    <div class="anl-card">
+      <div class="anl-type" style="color:#b8ff57">Fortalezas dominantes</div>
+      <div class="anl-title">Lo que te hace poderoso/a</div>
+      <ul class="list-ul">${getStrengths(profile, keyDims).map(s=>`<li><div class="li-dot" style="background:#b8ff57"></div>${s}</li>`).join('')}</ul>
+    </div>
+    <div class="anl-card">
+      <div class="anl-type" style="color:#ffb830">Talentos ocultos</div>
+      <div class="anl-title">Lo que aún no ves en ti</div>
+      <ul class="list-ul">${getHiddenTalents(profile, norm).map(s=>`<li><div class="li-dot" style="background:#ffb830"></div>${s}</li>`).join('')}</ul>
+    </div>
+  </div>`;
+
+  // ── RIESGOS ──
+  html += `<div class="sec-heading"><div class="sec-h">Mapa de riesgos</div></div>
+  <div class="anl-card">
+    <div class="anl-type" style="color:#ff5780">Indicadores de riesgo emocional y profesional</div>
+    <div class="anl-title">Lo que hay que tener en el radar</div>
+    <div class="risk-row" style="margin-bottom:20px;">`;
+  Object.entries(risks).forEach(([label,val])=>{
+    const clr = val>65?'#ff5780':val>45?'#ffb830':'#57ffe0';
+    html += `<div class="risk-item">
+      <span class="risk-label">${label}</span>
+      <div class="risk-bar-bg"><div class="risk-fill" style="width:${val}%;background:${clr}"></div></div>
+      <span class="risk-pct">${val}%</span>
+    </div>`;
+  });
+  html += `</div>
+    <ul class="list-ul">${getRisks(profile, norm).map(r=>`<li><div class="li-dot" style="background:#ff5780"></div>${r}</li>`).join('')}</ul>
+  </div>`;
+
+  // ── ENTORNO IDEAL ──
+  html += `<div class="sec-heading"><div class="sec-h">Entorno laboral ideal</div></div>
+  <div class="anl-card">
+    <div class="anl-type" style="color:#57ffe0">Contexto profesional óptimo</div>
+    <div class="anl-title">Dónde florecerás</div>
+    <div class="anl-body" style="margin-bottom:16px;">${profile.ambiente}</div>
+    <div class="env-row">
+      ${getEnvChips(profile).map(chip=>`<span class="env-chip" style="color:${chip.c};border-color:${chip.c}30;background:${chip.c}0d">${chip.t}</span>`).join('')}
+    </div>
+  </div>`;
+
+  // ── RECOMENDACIONES ──
+  html += `<div class="sec-heading"><div class="sec-h">Hoja de ruta personal</div></div>
+  <div class="analysis-grid">
+    <div class="anl-card">
+      <div class="anl-type" style="color:#9b6fff">Desarrollo personal</div>
+      <div class="anl-title">Próximos pasos emocionales</div>
+      <ul class="list-ul">${getRecsPersonal(profile,norm).map(r=>`<li><div class="li-dot" style="background:#9b6fff"></div>${r}</li>`).join('')}</ul>
+    </div>
+    <div class="anl-card">
+      <div class="anl-type" style="color:#4db8ff">Desarrollo académico</div>
+      <div class="anl-title">Próximos pasos académicos</div>
+      <ul class="list-ul">${getRecsAcademic(profile,top5).map(r=>`<li><div class="li-dot" style="background:#4db8ff"></div>${r}</li>`).join('')}</ul>
+    </div>
+  </div>`;
+
+  // ── PERFIL COGNITIVO Y EMOCIONAL CRUZADO ──
+  const pensamiento = getPensamiento(profile, norm);
+  const comunicacion_estilo = getComunicacion(profile, norm);
+  const decision_style = getDecisionStyle(profile, norm);
+
+  html += `<div class="sec-heading"><div class="sec-h">Perfil cognitivo y emocional</div></div>
+  <div class="analysis-grid">
+    <div class="anl-card">
+      <div class="anl-type" style="color:#4db8ff">Tipo de pensamiento</div>
+      <div class="anl-title">${pensamiento.title}</div>
+      <div class="anl-body">${pensamiento.desc}</div>
+    </div>
+    <div class="anl-card">
+      <div class="anl-type" style="color:#9b6fff">Estilo de comunicación</div>
+      <div class="anl-title">${comunicacion_estilo.title}</div>
+      <div class="anl-body">${comunicacion_estilo.desc}</div>
+    </div>
+    <div class="anl-card">
+      <div class="anl-type" style="color:#ffb830">Cómo tomas decisiones</div>
+      <div class="anl-title">${decision_style.title}</div>
+      <div class="anl-body">${decision_style.desc}</div>
+    </div>
+    <div class="anl-card">
+      <div class="anl-type" style="color:#57ffe0">Potencial de éxito</div>
+      <div class="anl-title">Tu ventaja competitiva</div>
+      <div class="anl-body">${getPotencial(profile, name)}</div>
+    </div>
+  </div>`;
+
+  // ── ESTABILIDAD EMOCIONAL ──
+  const emoProfile = getEmoProfile(norm);
+  html += `<div class="sec-heading"><div class="sec-h">Perfil emocional y resiliencia</div></div>
+  <div class="anl-card full">
+    <div class="anl-type" style="color:#9b6fff">Mapa de estabilidad emocional</div>
+    <div class="anl-title" style="margin-bottom:20px;">Cómo procesas y navegas el mundo emocional</div>
+    <div class="risk-row">`;
+  emoProfile.forEach(item=>{
+    html += `<div class="risk-item">
+      <span class="risk-label">${item.label}</span>
+      <div class="risk-bar-bg"><div class="risk-fill" style="width:${item.val}%;background:${item.color}"></div></div>
+      <span class="risk-pct" style="color:${item.color}">${item.val}%</span>
+    </div>`;
+  });
+  html += `</div>
+    <div class="anl-body" style="margin-top:20px;font-size:0.82rem;">${getEmoAnalysis(profile, norm)}</div>
+  </div>`;
+
+  // ── ANÁLISIS IA ──
+  html += `<div class="sec-heading"><div class="sec-h">Análisis psicológico profundo con IA</div></div>
+  <div class="anl-card full">
+    <div class="anl-type" style="color:#b8ff57">Generado con Claude — Anthropic</div>
+    <div class="anl-title">Tu análisis personalizado</div>
+    <div id="aiAnalysisWrap"><div class="ai-stream" id="aiAnalysis">Generando análisis profundo...<span class="ai-cursor"></span></div></div>
+  </div>`;
+
+  // ── CONSEJO FINAL ──
+  html += `<div class="anl-card full" style="border-color:${profile.color}40;background:${profile.color}06;">
+    <div class="anl-type" style="color:${profile.color}">Mensaje final</div>
+    <div class="anl-title">Una palabra antes de comenzar</div>
+    <div class="anl-body">${getFinalMessage(profile, name)}</div>
+  </div>
+
+  <div class="res-footer">
+    <button class="btn-restart" onclick="restart()">← Hacer el test de nuevo</button>
+  </div>`;
+
+  document.getElementById('resBody').innerHTML = html;
+  showScreen('s-results');
+
+  // Draw radar
+  setTimeout(()=>{
+    const ctx = document.getElementById('radarChart');
+    if(ctx && window.Chart){
+      new Chart(ctx,{
+        type:'radar',
+        data:{
+          labels:INTEL_TYPES.map(i=>i.name),
+          datasets:[{
+            label:`${name}`,
+            data:INTEL_TYPES.map(i=>intelScores[i.key]||35),
+            backgroundColor:'rgba(184,255,87,0.1)',
+            borderColor:'#b8ff57',
+            pointBackgroundColor:INTEL_TYPES.map(i=>i.color),
+            pointBorderColor:'#0c0c10',
+            pointRadius:5,
+            borderWidth:1.5,
+          }]
+        },
+        options:{
+          responsive:true,
+          maintainAspectRatio:true,
+          plugins:{legend:{display:false}},
+          scales:{
+            r:{
+              min:0,max:100,
+              ticks:{display:false},
+              grid:{color:'rgba(255,255,255,0.05)'},
+              pointLabels:{
+                font:{size:11,family:'DM Sans'},
+                color:'rgba(244,243,239,0.5)'
+              },
+              angleLines:{color:'rgba(255,255,255,0.04)'},
+            }
+          }
+        }
+      });
+    }
+
+    // Animate career bars
+    setTimeout(()=>{
+      document.querySelectorAll('.cbar-fill').forEach(el=>{
+        el.style.width = el.dataset.w + '%';
+      });
+    }, 300);
+
+    // Scroll-based fade-in for analysis cards
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.style.opacity='1';
+          e.target.style.transform='translateY(0)';
+          observer.unobserve(e.target);
+        }
+      });
+    },{threshold:0.1});
+    document.querySelectorAll('.anl-card,.metric-card,.career-card,.intel-card').forEach(el=>{
+      el.style.opacity='0';
+      el.style.transform='translateY(16px)';
+      el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  },200);
+
+  // Call AI analysis
+  callAIAnalysis(profile, top5, keyDims, name, norm, intelScores);
+}
+
+async function callAIAnalysis(profile, careers, keyDims, name, norm, intelScores){
+  const el = document.getElementById('aiAnalysis');
+  const topCareer = CAREERS_DATA[careers[0]]||{name:careers[0]};
+  const topIntel = INTEL_TYPES.sort((a,b)=>intelScores[b.key]-intelScores[a.key])[0];
+  const dims_str = keyDims.map(d=>`${d.label}: ${d.val}%`).join(', ');
+  const careers_str = careers.slice(0,4).map(c=>CAREERS_DATA[c]?.name||c).join(', ');
+
+  const prompt = `Eres un psicólogo vocacional experto analizando el perfil de ${name}, un/a adolescente de ${userInfo.age||16} años.
+
+Su perfil vocacional dominante es: "${profile.name}" — ${profile.tagline}
+Descripción del perfil: ${profile.desc}
+Dimensiones psicológicas principales: ${dims_str}
+Inteligencia dominante: ${topIntel.name}
+Estilo de liderazgo: ${profile.liderazgo}
+Carreras más compatibles: ${careers_str}
+
+Escribe un análisis psicológico profundo y COMPLETAMENTE PERSONALIZADO de 5-6 párrafos que:
+1. Explique en detalle la arquitectura mental y emocional de esta persona específica
+2. Identifique los patrones internos que probablemente ni ellos mismos han nombrado
+3. Hable sobre sus contradicciones internas y cómo pueden ser fuentes de poder
+4. Explique por qué las carreras recomendadas resuenan con su psicología profunda
+5. Dé un consejo emocionalmente inteligente y específico para su etapa de vida
+6. Termine con una reflexión poderosa sobre su potencial único
+
+Sé profundo, humano, preciso y emocionalmente resonante. Usa el nombre ${name} de manera natural. Escribe en segunda persona (tú/te/tu). No uses bullet points — escribe en prosa fluida y cálida.`;
+
+  try {
+    el.innerHTML = '<span class="ai-cursor"></span>';
+    const resp = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        stream:true,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    if(!resp.ok){ throw new Error('API error'); }
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let text = '';
+    el.textContent = '';
+    while(true){
+      const {done,value} = await reader.read();
+      if(done) break;
+      const chunk = decoder.decode(value);
+      const lines = chunk.split('\n');
+      for(const line of lines){
+        if(line.startsWith('data: ')){
+          const data = line.slice(6);
+          if(data==='[DONE]') break;
+          try{
+            const j = JSON.parse(data);
+            if(j.type==='content_block_delta' && j.delta?.text){
+              text += j.delta.text;
+              el.textContent = text;
+              el.scrollIntoView({behavior:'smooth',block:'nearest'});
+            }
+          }catch(e){}
+        }
+      }
+    }
+  } catch(err){
+    // Fallback analysis
+    el.textContent = getFallbackAnalysis(profile, name, keyDims, intelScores);
+  }
+}
+
+function getFallbackAnalysis(profile, name, keyDims, intelScores){
+  const topDim = keyDims.sort((a,b)=>b.val-a.val)[0];
+  return `${name}, lo que tu evaluación revela trasciende lo que normalmente un test vocacional mostraría. No estamos hablando simplemente de "carreras que te gustan" — estamos hablando de la arquitectura profunda de cómo procesas el mundo, qué te da energía y qué tipo de problemas tu mente está diseñada para resolver.
+
+Tu perfil como "${profile.name}" no es solo una etiqueta — es la descripción de una forma específica y poderosa de estar en el mundo. ${profile.desc}
+
+Lo que tu evaluación detecta con claridad es una tensión productiva: tienes por un lado una ${topDim.label.toLowerCase()} que opera a niveles muy altos (${topDim.val}%), y por el otro, una serie de valores que definen con precisión qué tipo de trabajo puede darte el significado que necesitas. Esta tensión no es un problema — es combustible.
+
+Lo que muchas personas en tu etapa no ven es que las "contradicciones" internas — querer ir rápido pero también hacer las cosas bien, querer impactar a muchos pero necesitar profundidad en lo que haces, liderar pero también aprender de otros — no son debilidades. Son la señal de una mente compleja que opera en múltiples registros simultáneamente. Eso, en el mundo profesional, es una ventaja brutal.
+
+El consejo más honesto que tu perfil sugiere: no elijas una carrera. Elige un problema que el mundo necesita resolver y que tú no puedes ignorar. Las carreras son contenedores; el trabajo real sucede cuando tu forma única de ver el mundo colisiona con un problema que te importa de verdad. Confía en ese instinto — tu perfil dice que lo tienes.`;
+}
+
+function getPersonalityAnalysis(profile, keyDims, name, topIntel){
+  return `<strong>${name}</strong>, tu análisis revela un perfil psicológico de alta complejidad y potencial. La dimensión dominante de tu evaluación apunta a una mente que opera con un nivel de consciencia y reflexión por encima de lo que es habitual en tu etapa de vida. El perfil <strong>${profile.name}</strong> no es solo una categoría — es la descripción de una arquitectura mental específica que combina ${profile.traits.slice(0,2).join(' con ').toLowerCase()}.
+  
+  Tu inteligencia predominante es la <strong>${topIntel.name}</strong>, lo que significa que tu forma primaria de procesar el mundo — de aprender, crear, resolver y conectar — pasa por esa dimensión. Esto tiene implicaciones directas en qué ambientes te dan energía, qué tipos de problemas encuentras naturalmente estimulantes y qué carreras aprovechan tu potencial de forma más completa.`;
+}
+
+function getStrengths(profile, keyDims){
+  const top3 = [...keyDims].sort((a,b)=>b.val-a.val).slice(0,3);
+  const base = [
+    `<strong>${top3[0]?.label||'Pensamiento analítico'}</strong>: opera a ${top3[0]?.val||70}% — significativamente por encima del promedio`,
+    `Capacidad de síntesis: conviertes información compleja en perspectivas claras y accionables`,
+    `Potencial de liderazgo con profundidad: ${profile.traits[0].toLowerCase()}`,
+    `Alta autoconciencia comparativa con tu grupo de edad`,
+    `Visión de largo plazo que te permite ver el tablero completo cuando otros ven solo una pieza`,
+  ];
+  return base;
+}
+
+function getHiddenTalents(profile, norm){
+  const talents = {
+    arquitecto_estrategico:[
+      'Capacidad de mediar entre visiones técnicas y humanas que la mayoría no puede articular en una sola conversación',
+      'Talento natural para diseñar procesos que escalan sin perder calidad ni coherencia',
+      'Habilidad de anticipar consecuencias de segundo y tercer orden que otros no ven hasta que ya ocurrieron',
+    ],
+    innovador_analitico:[
+      'Habilidad de hacer las preguntas que redefinen el problema antes de intentar resolverlo',
+      'Capacidad de encontrar patrones ocultos en datos o situaciones aparentemente no relacionadas',
+      'Potencial de investigación original que va mucho más allá de lo que el sistema educativo típicamente activa',
+    ],
+    comunicador_visionario:[
+      'Capacidad de leer el estado emocional colectivo de un grupo y saber qué necesita ser dicho — y cuándo',
+      'Talento narrativo que, bien dirigido, puede influir en decisiones, políticas o movimientos culturales',
+      'Habilidad de convertir conceptos abstractos en experiencias concretas y memorables para cualquier audiencia',
+    ],
+    lider_humanitario:[
+      'Capacidad de crear comunidad real donde antes había individuos aislados — un don que la mayoría subestima',
+      'Talento para ver el potencial en personas que ellas mismas no reconocen en sí mismas aún',
+      'Habilidad de sostener conversaciones difíciles que otros evitan, con una honestidad que no destruye sino construye',
+    ],
+    creador_multidimensional:[
+      'Capacidad de percibir conexiones entre campos completamente distintos que nadie más en la sala conectaría',
+      'Talento para expresar lo inexpresable — emociones, ideas o verdades que otros sienten pero no pueden articular',
+      'Habilidad de innovar estéticamente desde un lugar auténtico que va más allá de las tendencias del mercado',
+    ],
+    emprendedor_disruptivo:[
+      'Capacidad de ver oportunidades de mercado en fricción, ineficiencia o vacíos que otros perciben como problemas',
+      'Talento de venta y persuasión que opera desde la convicción, no desde la manipulación',
+      'Habilidad de construir equipos desde la energía y la visión — no solo desde el recurso técnico disponible',
+    ],
+    guardian_de_la_justicia:[
+      'Capacidad de detectar las contradicciones lógicas o éticas en un argumento antes de que la mayoría las identifique',
+      'Talento para representar a personas que no tienen voz propia con una autenticidad que genera confianza real',
+      'Habilidad de transformar la indignación en acción estratégica — no solo en queja o denuncia vacía',
+    ],
+    maestro_explorador:[
+      'Capacidad de simplificar lo extremadamente complejo sin perder ni un gramo de su profundidad real',
+      'Talento de hacer sentir a cada persona como si la conversación estuviera diseñada específicamente para ella',
+      'Habilidad de generar curiosidad en personas que juraban que "ese tema no era para ellas"',
+    ],
+    sanador_profundo:[
+      'Capacidad de leer lo no dicho — lo que está detrás de las palabras que alguien usa — con una precisión asombrosa',
+      'Talento para crear espacios de confianza donde la vulnerabilidad se siente segura y no amenazante',
+      'Habilidad de integrar intuición emocional con rigor conceptual — una combinación que define a los mejores clínicos',
+    ],
+    constructor_de_sistemas:[
+      'Capacidad de ver las interdependencias invisibles de un sistema antes de que fallen — y actuar antes del colapso',
+      'Talento para crear estructuras que funcionan incluso cuando quien las diseñó no está presente para supervisarlas',
+      'Habilidad de hacer que lo complejo parezca simple una vez que está en funcionamiento — y eso requiere enorme inteligencia',
+    ],
+    explorador_digital:[
+      'Capacidad de pensar en código como otros piensan en lenguaje — de forma fluida, natural y creativa',
+      'Talento para identificar las implicaciones sociales y éticas de la tecnología antes de que se vuelvan problemas masivos',
+      'Habilidad de aprender herramientas y lenguajes completamente nuevos en tiempos que dejarían atrás a la mayoría',
+    ],
+    puente_entre_mundos:[
+      'Capacidad de traducir no solo idiomas sino cosmovisiones — hacer que un mundo entienda a otro con profundidad real',
+      'Talento para construir confianza en contextos donde los actores tienen incentivos opuestos y desconfían entre sí',
+      'Habilidad de sintetizar perspectivas radicalmente distintas en una narrativa que todas las partes puedan reconocer como suya',
+    ],
+  };
+  return talents[profile.id] || talents.innovador_analitico;
+}
+
+function getRisks(profile, norm){
+  const risks = {
+    arquitecto_estrategico:[
+      'Tendencia a sobreanalizar antes de actuar — la perfección puede ser el enemigo de lo suficientemente bueno a tiempo',
+      'Dificultad para delegar: crees que nadie puede hacerlo tan bien como tú — y a veces tienes razón, pero eso agota y no escala',
+      'Riesgo de burnout intelectual por asumir responsabilidad cognitiva de absolutamente todo lo que entra en tu radio de control',
+    ],
+    innovador_analitico:[
+      'Parálisis del análisis: puedes saber tanto que te bloqueas al actuar sin tener suficiente certeza — y la certeza perfecta no llega nunca',
+      'Dificultad para comunicar tus ideas a personas con menor profundidad técnica — y frustración crónica cuando no te comprenden',
+      'Tendencia al perfeccionismo que ralentiza la entrega y puede aislarte de equipos que trabajan a ritmos más pragmáticos',
+    ],
+    comunicador_visionario:[
+      'Alta dependencia de validación externa para sentirte seguro/a de tus ideas — lo que te hace emocionalmente vulnerable al rechazo',
+      'Tendencia a vender el sueño antes de tener la estructura — brillante en la visión, a veces débil en la ejecución de los detalles',
+      'Riesgo de dispersión: con tanta capacidad de conectar con todo, puedes perder la profundidad que da autoridad real a tu voz',
+    ],
+    lider_humanitario:[
+      'Riesgo real de burnout emocional por absorber el dolor de otros sin mecanismos de descarga y procesamiento propios',
+      'Dificultad para poner límites sanos — la culpa de "no hacer suficiente" puede convertirse en parálisis o en resentimiento silencioso',
+      'Tendencia a sacrificar tus propias necesidades por las de los demás hasta el punto de descuidar tu propio bienestar y potencial',
+    ],
+    creador_multidimensional:[
+      'Dificultad seria con la disciplina sostenida y la entrega cuando un proyecto ha perdido su emoción y novedad inicial',
+      'Alta sensibilidad a la crítica de tu trabajo creativo — lo que puede bloquearte o hacerte no compartir lo que más vale la pena mostrar',
+      'Tendencia a comenzar muchos proyectos y terminar pocos — la euforia del inicio no siempre sobrevive al trabajo sostenido del proceso',
+    ],
+    emprendedor_disruptivo:[
+      'Tendencia a moverse demasiado rápido — la velocidad que es tu fortaleza puede hacer que dejes a tu equipo o a la realidad del mercado atrás',
+      'Dificultad para operar dentro de estructuras o procesos que no controlas — lo que puede crear fricciones en entornos colaborativos',
+      'Riesgo de sobreestimar tu propia idea o capacidad en etapas tempranas, lo que puede llevarte a decisiones costosas sin suficiente validación',
+    ],
+    guardian_de_la_justicia:[
+      'Tendencia a ver el mundo en términos muy absolutos — blanco o negro — lo que puede hacerte menos efectivo en la negociación de grises reales',
+      'Riesgo de agotamiento por el peso emocional de las causas que defiendes, especialmente cuando el cambio es lento o sistémico',
+      'Dificultad para ceder o encontrar puntos medios sin sentirlo como una traición a tus principios — lo que puede aislar tus aliados potenciales',
+    ],
+    maestro_explorador:[
+      'Tendencia a sobre-explicar o a profundizar más de lo que el contexto requiere — lo que puede perder a tu audiencia antes de llegar al punto',
+      'Dificultad para actuar sin tener el conocimiento suficientemente consolidado — lo que puede retrasar el momento de empezar a impactar',
+      'Riesgo de agotamiento cuando el sistema educativo o institucional en el que operas no valora ni recompensa tu tipo de enseñanza',
+    ],
+    sanador_profundo:[
+      'Riesgo de absorción emocional patológica — llevar los problemas de otros a tu propia vida sin un sistema consciente de descarga',
+      'Dificultad para mantener distancia terapéutica óptima sin sentirlo como frialdad o falta de compromiso genuino',
+      'Tendencia a sobre-responsabilizarte del bienestar ajeno, lo que puede generarte culpa cuando alguien no mejora aunque hayas hecho todo bien',
+    ],
+    constructor_de_sistemas:[
+      'Tendencia a priorizar la eficiencia del sistema sobre las necesidades emocionales de las personas dentro del sistema',
+      'Dificultad para operar bien en contextos altamente caóticos o cambiantes donde las reglas no están definidas ni son predecibles',
+      'Riesgo de rigidez: una vez que un sistema funciona, puede costarte reconocer cuándo necesita ser rediseñado desde cero en lugar de optimizado',
+    ],
+    explorador_digital:[
+      'Tendencia al aislamiento — la profundidad técnica puede alejarte de las habilidades blandas que determinan el liderazgo real en tecnología',
+      'Dificultad para comunicar el valor de lo que haces a personas no técnicas — lo que puede limitar tu influencia y tus oportunidades',
+      'Riesgo de obsolescencia si te especializas demasiado en una tecnología específica sin mantener la amplitud de tu perfil técnico general',
+    ],
+    puente_entre_mundos:[
+      'Riesgo de identidad difusa — al adaptarte tan bien a tantos contextos, puede costarte saber con claridad quién eres tú en tu centro',
+      'Tendencia a asumir la carga emocional de mediar entre partes en conflicto sin cobrar ese costo en tu propio bienestar',
+      'Dificultad para tomar posiciones firmes cuando el rol de mediador te pide neutralidad pero tus valores tienen opinión clara',
+    ],
+  };
+  return risks[profile.id] || [
+    'Detectar y gestionar los bloqueos específicos de tu perfil es parte clave del proceso vocacional',
+    'Mantener el autocuidado emocional como práctica no negociable, especialmente en etapas de alta demanda',
+    'Desarrollar conciencia de los patrones automáticos que pueden sabotear tus objetivos de largo plazo',
+  ];
+}
+
+function getEnvChips(profile){
+  const chips = {
+    arquitecto_estrategico:[{t:'Alta autonomía técnica',c:'#4db8ff'},{t:'Proyectos de largo aliento',c:'#b8ff57'},{t:'Equipos de alto rendimiento',c:'#ffb830'},{t:'Cultura de excelencia',c:'#57ffe0'}],
+    innovador_analitico:[{t:'Investigación real',c:'#4db8ff'},{t:'Cultura de preguntas profundas',c:'#b8ff57'},{t:'Tiempo para profundizar',c:'#9b6fff'},{t:'Rigor metodológico',c:'#57ffe0'}],
+    comunicador_visionario:[{t:'Audiencias reales y grandes',c:'#ff5780'},{t:'Proyectos de alto impacto',c:'#b8ff57'},{t:'Ritmo dinámico y variado',c:'#ffb830'},{t:'Creatividad valorada',c:'#9b6fff'}],
+    lider_humanitario:[{t:'Propósito claro y compartido',c:'#9b6fff'},{t:'Impacto humano medible',c:'#b8ff57'},{t:'Valores alineados en el equipo',c:'#57ffe0'},{t:'Flexibilidad empática',c:'#ff5780'}],
+    creador_multidimensional:[{t:'Libertad creativa total',c:'#ffb830'},{t:'Proyectos variados y vivos',c:'#ff5780'},{t:'Riesgo estético aceptado',c:'#9b6fff'},{t:'Colaboradores sensibles',c:'#b8ff57'}],
+    emprendedor_disruptivo:[{t:'Autonomía máxima',c:'#57ffe0'},{t:'Velocidad de decisión',c:'#b8ff57'},{t:'Riesgo calculado bienvenido',c:'#ffb830'},{t:'Visión ambiciosa compartida',c:'#4db8ff'}],
+    guardian_de_la_justicia:[{t:'Misión ética clara',c:'#ff5780'},{t:'Trabajo con impacto sistémico',c:'#9b6fff'},{t:'Estructura que protege la integridad',c:'#b8ff57'},{t:'Pares con convicción',c:'#57ffe0'}],
+    maestro_explorador:[{t:'Espacio para profundizar',c:'#4db8ff'},{t:'Audiencias receptivas',c:'#b8ff57'},{t:'Autonomía pedagógica',c:'#9b6fff'},{t:'Cultura de aprendizaje',c:'#ffb830'}],
+    sanador_profundo:[{t:'Consulta íntima',c:'#9b6fff'},{t:'Tiempo real con personas',c:'#b8ff57'},{t:'Supervisión y contención',c:'#57ffe0'},{t:'Equipo con empatía estructural',c:'#ff5780'}],
+    constructor_de_sistemas:[{t:'Procesos complejos reales',c:'#4db8ff'},{t:'Objetivos medibles y claros',c:'#b8ff57'},{t:'Estructura organizacional sólida',c:'#ffb830'},{t:'Métricas de éxito definidas',c:'#57ffe0'}],
+    explorador_digital:[{t:'Stack tecnológico de vanguardia',c:'#57ffe0'},{t:'Problemas sin resolver aún',c:'#4db8ff'},{t:'Cultura de experimentación',c:'#b8ff57'},{t:'Pares técnicos de alto nivel',c:'#9b6fff'}],
+    puente_entre_mundos:[{t:'Contextos multiculturales',c:'#ffb830'},{t:'Proyectos de alcance global',c:'#b8ff57'},{t:'Diversidad de actores',c:'#ff5780'},{t:'Rol de conexión estratégica',c:'#4db8ff'}],
+  };
+  return chips[profile.id] || chips.creador_multidimensional;
+}
+
+function getRecsPersonal(profile, norm){
+  const base = [
+    `Desarrolla un ritual diario de 10-15 minutos de reflexión — tu autoconciencia ya es alta; profundizarla aún más te dará una ventaja brutal`,
+    `Trabaja en poner límites sanos con proactividad — saber decir no a lo que no alinea contigo es una forma de honrar tu potencial`,
+    `Busca un mentor real que esté 5-10 años adelante de donde quieres llegar — una conversación mensual puede reencuadrar años de camino`,
+    `Practica la acción imperfecta conscientemente: entregar algo al 80% es infinitamente más valioso que esperar el 100% que nunca llega`,
+  ];
+  const profile_specific = {
+    arquitecto_estrategico: `Aprende a celebrar lo que se termina, no solo lo que funciona perfectamente — el hábito de completar es más poderoso que el perfeccionismo`,
+    innovador_analitico: `Comparte tus ideas antes de que estén "listas" — la retroalimentación temprana es datos, no amenaza a tu inteligencia`,
+    comunicador_visionario: `Cultiva la profundidad detrás de tu presencia — estudia un campo a nivel experto para que tu influencia tenga raíces reales`,
+    lider_humanitario: `Diseña un sistema de descarga emocional semanal — procesar lo que absorbes de otros no es debilidad, es sostenibilidad`,
+    creador_multidimensional: `Termina algo pequeño cada mes aunque sea imperfecto — la disciplina de completar es el músculo que te falta fortalecer`,
+    emprendedor_disruptivo: `Desarrolla el hábito de validar antes de construir — habla con 10 personas antes de invertir en cualquier idea nueva`,
+    guardian_de_la_justicia: `Aprende técnicas de negociación donde ganen ambas partes — tu convicción es poderosa, pero la diplomacia la hace más efectiva`,
+    maestro_explorador: `Crea un espacio donde enseñes algo actualmente — un canal, un grupo, tutorías — el feedback acelerará tu crecimiento`,
+    sanador_profundo: `Establece un sistema de supervisión o apoyo propio — necesitas un espacio donde tú también seas el que recibe`,
+    constructor_de_sistemas: `Practica la escucha emocional activa en tus equipos — los sistemas que duran son los que las personas quieren mantener`,
+    explorador_digital: `Construye proyectos de side-project que puedas mostrar — en tecnología, el portafolio real supera cualquier credencial académica`,
+    puente_entre_mundos: `Escribe o documenta lo que sintetizas en tus mediaciones — convertir tu talento en conocimiento transferible lo multiplica`,
+  };
+  return [...base.slice(0,3), profile_specific[profile.id] || base[3]];
+}
+
+function getRecsAcademic(profile, careers){
+  const topC = CAREERS_DATA[careers[0]]||{name:'tu área de interés'};
+  const base = [
+    `Conecta con profesionales en LinkedIn en ${topC.name} — pide 20 minutos de su tiempo para entender cómo llegaron a donde están`,
+    `Busca proyectos prácticos reales antes de terminar la secundaria — un portafolio con resultados concretos vale más que cualquier nota`,
+    `Usa plataformas como Coursera, edX, MIT OpenCourseWare o YouTube para profundizar ya en ${topC.name}`,
+    `Lee al menos un libro al mes en tu campo de mayor interés — la profundidad te diferenciará de la mayoría que solo consume contenido superficial`,
+    `Participa en olimpiadas, concursos, hackatones o programas de verano de universidades — son puertas reales con alto ROI de esfuerzo`,
+  ];
+  return base;
+}
+
+function getFinalMessage(profile, name){
+  const msgs = {
+    arquitecto_estrategico:`<strong>${name}</strong>, tu mente fue diseñada para hacer que las cosas funcionen a una escala que la mayoría de personas no puede imaginar. El mundo necesita personas que puedan ver el sistema completo y también ejecutar con precisión los detalles que lo hacen funcionar. Eso eres tú — y es más raro de lo que crees.`,
+    innovador_analitico:`<strong>${name}</strong>, las preguntas que te haces — las que te mantienen despierto/a, las que nadie a tu alrededor parece entender — son exactamente las preguntas que el mundo necesita que alguien responda. Confía en tu curiosidad. Es el tipo de combustible que nunca se agota si aprendes a cultivarlo bien.`,
+    comunicador_visionario:`<strong>${name}</strong>, tienes algo que muy pocas personas en el mundo poseen: la capacidad genuina de hacer que las ideas importen para quienes las escuchan. Eso no es un pasatiempo — es una responsabilidad. Úsala con la profundidad y la intención que merece, y su alcance será mayor de lo que ahora imaginas.`,
+    lider_humanitario:`<strong>${name}</strong>, el mundo no necesita más personas que busquen poder. Necesita personas que quieran servir con inteligencia, corazón y estrategia. Tú tienes esa combinación rara. Con ella, puedes cambiar cosas que llevan generaciones sin moverse — si sabes también cuidarte en el proceso.`,
+    creador_multidimensional:`<strong>${name}</strong>, lo que creas desde tu mundo interior — aunque todavía no lo hayas mostrado al mundo — tiene el poder de tocar a personas que nunca conocerás. No guardes eso. No esperes que esté "perfecto". El acto de crear y compartir es en sí mismo el mensaje.`,
+    emprendedor_disruptivo:`<strong>${name}</strong>, las ideas que tienes en la cabeza y que parecen demasiado grandes o demasiado pronto — esas son exactamente las que el mundo necesita que alguien empiece. No mañana. Ahora. Con lo que tienes. El momento nunca es perfecto; tú sí estás listo/a.`,
+    guardian_de_la_justicia:`<strong>${name}</strong>, tu convicción es un regalo — uno que el mundo necesita urgentemente, pero que también requiere que aprendas a sostenerla a lo largo del tiempo sin destruirte en el proceso. Los cambios sistémicos los logran personas que saben cuándo empujar y cuándo respirar.`,
+    maestro_explorador:`<strong>${name}</strong>, el acto de enseñar algo que entiendes profundamente no es solo compartir conocimiento — es multiplicar tu impacto de manera exponencial. Cada persona que enciendas con tu curiosidad llevará esa llama a lugares que tú nunca podrías alcanzar solo/a.`,
+    sanador_profundo:`<strong>${name}</strong>, las personas que tienen la capacidad de acompañar a otros en sus momentos más oscuros son de las más valiosas que existen en el mundo. Ese es tu territorio. Solo recuerda que para ayudar a otros a sanarse, tú también tienes que estar en un lugar de integridad y cuidado propio.`,
+    constructor_de_sistemas:`<strong>${name}</strong>, el trabajo invisible que haces — construir las estructuras que permiten que otros brillen — es más poderoso de lo que suele reconocerse. Los grandes sistemas que mueven el mundo fueron diseñados por personas como tú: meticulosas, visionarias y orientadas a que las cosas realmente funcionen.`,
+    explorador_digital:`<strong>${name}</strong>, vives en el futuro que el resto del mundo apenas empieza a imaginar. Esa posición no es accidental — es el resultado de cómo tu mente está construida. Úsala para construir cosas que importen, que duren y que tengan en cuenta el impacto humano de la tecnología que creas.`,
+    puente_entre_mundos:`<strong>${name}</strong>, en un mundo que se fragmenta cada vez más, las personas que pueden conectar lo que está separado son indispensables. Tu talento de moverte entre mundos y hacer que se entiendan no solo es valioso — es urgente. Confía en esa capacidad y llévala adonde más se necesite.`,
+  };
+  return msgs[profile.id] || `<strong>${name}</strong>, este análisis es el comienzo de un camino, no el destino. Lo más importante que puedes hacer con estos resultados es actuar — explorar, probar, equivocarte y aprender. Tu perfil muestra que tienes todo lo necesario. El siguiente paso es tuyo.`;
+}
+
+function getPensamiento(profile, norm){
+  const map = {
+    arquitecto_estrategico:{title:'Pensamiento Sistémico-Estratégico',desc:'Procesas el mundo en sistemas y estructuras. Tu mente descompone automáticamente la complejidad en partes manejables y las reorganiza en esquemas que otros no pueden ver. Piensas en causa-efecto de múltiples pasos y rara vez te conformas con respuestas superficiales.'},
+    innovador_analitico:{title:'Pensamiento Científico-Convergente',desc:'Tu mente busca la explicación exacta detrás de cada fenómeno. Formulas hipótesis de manera natural, buscas datos que las validen o refuten, y desconfías de las conclusiones que no tienen sustento empírico. La precisión es para ti una forma de respeto intelectual.'},
+    comunicador_visionario:{title:'Pensamiento Narrativo-Asociativo',desc:'Procesas el mundo en historias y conexiones emocionales. Tu mente conecta ideas de campos completamente distintos a través de metáforas e imágenes que otros simplemente no generan. Esta forma de pensar es la base de tu poder comunicativo.'},
+    lider_humanitario:{title:'Pensamiento Relacional-Contextual',desc:'Tu mente siempre pregunta: ¿cómo afecta esto a las personas? Procesas situaciones a través del filtro humano antes que el técnico. Esto te da una capacidad de liderazgo empático que genera lealtad genuina, no solo obediencia instrumental.'},
+    creador_multidimensional:{title:'Pensamiento Divergente-Asociativo',desc:'Tu mente genera múltiples posibilidades para cada situación antes de evaluarlas. Conectas inputs de naturaleza completamente distinta — visual, emocional, conceptual — y los integras en síntesis originales. Esta es la firma cognitiva de los grandes creadores.'},
+    emprendedor_disruptivo:{title:'Pensamiento Lateral-Oportunista',desc:'Ves el mundo en términos de brechas, fricciones e ineficiencias que representan oportunidades. Tu mente no acepta "así es como siempre se hace" como respuesta válida, y tiene una habilidad natural de imaginar sistemas alternativos.'},
+    guardian_de_la_justicia:{title:'Pensamiento Crítico-Deductivo',desc:'Tu mente evalúa argumentos en busca de inconsistencias lógicas o éticas con una precisión casi automática. Llegas a conclusiones a través de cadenas de razonamiento rigurosas y te resulta difícil aceptar premisas sin cuestionarlas.'},
+    maestro_explorador:{title:'Pensamiento Integrativo-Pedagógico',desc:'Procesas el conocimiento a través de la pregunta: ¿cómo lo explico de manera que tenga sentido? Esto te fuerza a entender las cosas de manera más profunda que la mayoría, porque no puedes enseñar lo que no has comprendido realmente.'},
+    sanador_profundo:{title:'Pensamiento Empático-Interpretativo',desc:'Tu mente decodifica señales no verbales, subcontextos emocionales y patrones de comportamiento de manera casi instintiva. Llegas a conclusiones sobre las personas a través de un procesamiento que integra datos racionales con intuiciones somáticas.'},
+    constructor_de_sistemas:{title:'Pensamiento Procedimental-Optimizador',desc:'Naturalmente buscas la secuencia más eficiente para llegar a un resultado. Tu mente mapea flujos, identifica cuellos de botella y diseña protocolos antes de ejecutar. Esto te hace invaluable en cualquier organización que necesite escalar.'},
+    explorador_digital:{title:'Pensamiento Computacional-Abstracto',desc:'Procesas el mundo en términos de lógica, patrones y algoritmos. Tu mente puede sostener niveles de abstracción que la mayoría de personas no puede manejar cómodamente. Esta capacidad es la base del pensamiento técnico de alto nivel.'},
+    puente_entre_mundos:{title:'Pensamiento Sintético-Multicultural',desc:'Tu mente integra perspectivas radicalmente distintas sin rechazar ninguna de entrada. Puedes sostener la tensión de puntos de vista contradictorios el tiempo suficiente para encontrar la síntesis que las trasciende — una habilidad extraordinariamente rara.'},
+  };
+  return map[profile.id] || {title:'Pensamiento Complejo',desc:'Tu perfil muestra un pensamiento multidimensional que integra lógica, emoción y visión de manera sofisticada.'};
+}
+
+function getComunicacion(profile, norm){
+  const map = {
+    arquitecto_estrategico:{title:'Comunicador Preciso y Directo',desc:'Comunicas de manera estructurada y orientada a la solución. Tus palabras tienen peso porque son pocas y certeras. Eres más efectivo en formatos donde puedes preparar tu mensaje — presentaciones, documentos, planes — que en conversaciones improvisadas de alta carga emocional.'},
+    innovador_analitico:{title:'Comunicador Conceptual y Profundo',desc:'Te expresas con una profundidad que a veces supera lo que tu audiencia puede procesar. Tu reto es calibrar el nivel de detalle según el interlocutor. Cuando lo logras, eres de las pocas personas que puede explicar algo realmente complejo de manera memorable.'},
+    comunicador_visionario:{title:'Comunicador Magnético y Narrativo',desc:'Tienes el don de hacer que cualquier historia o idea se sienta importante y urgente. Usas el lenguaje con una precisión emocional que genera conexión genuina. Eres naturalmente persuasivo/a sin necesitar manipular — la autenticidad es tu técnica más poderosa.'},
+    lider_humanitario:{title:'Comunicador Empático y Contenedor',desc:'Las personas se sienten escuchadas y comprendidas cuando hablan contigo de una manera que pocas experiencias en su vida les dan. Esto no es técnica — es una presencia genuina que se percibe inmediatamente y genera confianza antes de que hayas dicho nada.'},
+    creador_multidimensional:{title:'Comunicador Visual y Metafórico',desc:'Expresas ideas a través de imágenes, analogías y metáforas que hacen que conceptos abstractos se vuelvan tangibles. Tus palabras pintan cuadros. Este estilo puede perder a audiencias muy literales, pero conecta profundamente con personas de alta sensibilidad.'},
+    emprendedor_disruptivo:{title:'Comunicador Visionario y Energizante',desc:'Tienes la habilidad de hacer que las personas crean en algo que aún no existe. Tu comunicación transmite certeza antes de que haya pruebas — lo que es poderoso para reclutar y motivar, pero requiere que aprendas a sostener esa energía con ejecución real.'},
+    guardian_de_la_justicia:{title:'Comunicador Argumentativo y Claro',desc:'Tu comunicación es la de alguien que ha pensado antes de hablar. Usas la lógica, los hechos y la ética como pilares de tu argumentación. Puedes ser extraordinariamente persuasivo/a cuando aprendes a combinar tu rigor intelectual con apertura emocional.'},
+    maestro_explorador:{title:'Comunicador Pedagógico y Claro',desc:'Tienes la habilidad excepcional de hacer que algo difícil parezca accesible sin volverlo superficial. Calibras tu lenguaje según tu audiencia de manera casi instintiva. Esta es la habilidad comunicativa más valiosa para el mundo del conocimiento y la educación.'},
+    sanador_profundo:{title:'Comunicador Contenedor y Preciso',desc:'Eliges tus palabras con un cuidado que la mayoría de personas no ejerce — porque sabes que las palabras en el contexto correcto tienen el poder de sanar o de dañar. Tu comunicación crea espacios seguros donde la vulnerabilidad se siente protegida.'},
+    constructor_de_sistemas:{title:'Comunicador Claro y Orientado a Resultados',desc:'Comunicas de manera directa y funcional, sin adornos innecesarios. Tus mensajes siempre tienen un objetivo claro. Tu reto es aprender a adaptar este estilo cuando el contexto requiere más calidez emocional o flexibilidad narrativa.'},
+    explorador_digital:{title:'Comunicador Técnico en Evolución',desc:'Tu comunicación es precisa en contextos técnicos y a veces requiere ajuste en contextos sociales o emocionales. El profesional tecnológico que aprende a comunicar con claridad para audiencias no técnicas multiplica su influencia de manera exponencial.'},
+    puente_entre_mundos:{title:'Comunicador Adaptativo y Diplomático',desc:'Adaptas tu estilo comunicativo al interlocutor con una fluidez que pocas personas poseen. Puedes comunicar la misma idea de cinco maneras distintas según a quién le hables. Esta habilidad te convierte en el mediador ideal en casi cualquier contexto.'},
+  };
+  return map[profile.id] || {title:'Comunicador Multidimensional',desc:'Tu estilo comunicativo adapta su forma según el contexto, combinando precisión y empatía.'};
+}
+
+function getDecisionStyle(profile, norm){
+  const map = {
+    arquitecto_estrategico:{title:'Decisor Analítico-Deliberado',desc:'Antes de decidir, mapeas opciones, evalúas consecuencias y buscas la solución óptima. Esto te da decisiones de alta calidad pero puede volverse lento en contextos que requieren acción rápida. Tu reto es desarrollar confianza en tu juicio antes de tener toda la información.'},
+    innovador_analitico:{title:'Decisor Basado en Evidencia',desc:'Solo tomas decisiones cuando tienes suficiente información para sentirte seguro/a. Esto es una fortaleza en entornos académicos y técnicos, pero puede paralizarte en contextos empresariales donde la velocidad de decisión es tan importante como su calidad.'},
+    comunicador_visionario:{title:'Decisor Intuitivo-Emocional',desc:'Tus mejores decisiones vienen de una combinación de intuición social y análisis rápido. Lees el ambiente y a las personas antes de leer los datos. Esto te da velocidad y adaptabilidad, aunque a veces necesitas frenar para validar que tu intuición tiene base sólida.'},
+    lider_humanitario:{title:'Decisor Consultivo-Consensual',desc:'Antes de decidir, buscas entender cómo afectará a las personas involucradas y procuras incluir sus perspectivas. Esto construye compromiso genuino con las decisiones, aunque en situaciones de urgencia puede percibirse como indecisión.'},
+    creador_multidimensional:{title:'Decisor Intuitivo-Explorador',desc:'Tus decisiones siguen un proceso que tú mismo/a a veces no puedes describir completamente — confías en una síntesis de señales que tu mente ha procesado de manera no lineal. Cuando aprendes a validar esta intuición con datos, tus decisiones se vuelven notablemente poderosas.'},
+    emprendedor_disruptivo:{title:'Decisor Veloz y Reversible',desc:'Decides rápido, actúas y ajustas. Para ti, una decisión incorrecta que se puede corregir es mejor que una decisión perfecta que llega tarde. Esta filosofía es la adecuada en entornos de alta incertidumbre, pero requiere humildad para reconocer y corregir los errores pronto.'},
+    guardian_de_la_justicia:{title:'Decisor Principista-Deliberado',desc:'Tus decisiones siempre pasan por el filtro de qué es correcto, antes que qué es conveniente. Esto te da integridad pero a veces puede costarte flexibilidad cuando el mundo real requiere navegar en zonas grises complejas.'},
+    maestro_explorador:{title:'Decisor Informado-Contextual',desc:'Buscas entender profundamente el contexto antes de decidir. Esto te da perspectiva que otros no tienen, aunque puede hacer que tu proceso parezca lento a ojos de quienes prefieren la velocidad sobre la calidad deliberativa.'},
+    sanador_profundo:{title:'Decisor Empático-Prudente',desc:'Pesas el impacto emocional de cada decisión con un cuidado que la mayoría de personas no ejerce. Esto es una fortaleza enorme en contextos clínicos o de liderazgo humano, pero puede generarte conflicto cuando el bienestar de alguien a corto plazo choca con su bien a largo plazo.'},
+    constructor_de_sistemas:{title:'Decisor Procedimental-Metodico',desc:'Sigues un proceso para decidir y te sientes cómodo/a tomando decisiones cuando el proceso está definido. Tu reto es desarrollar mayor agilidad cuando el contexto cambia más rápido de lo que el proceso puede adaptarse.'},
+    explorador_digital:{title:'Decisor Técnico-Experimental',desc:'Decides a través de prototipado mental — evalúas opciones imaginando cómo se implementarían técnicamente. Esto te da precisión en decisiones técnicas, aunque en decisiones con alta carga humana o política puede faltarte la dimensión emocional.'},
+    puente_entre_mundos:{title:'Decisor Diplomático-Integrador',desc:'Tus decisiones buscan crear soluciones donde múltiples partes puedan reconocerse. Esto es extraordinariamente valioso en contextos de negociación y mediación, aunque a veces puede llevar más tiempo de lo que las partes más impacientes están dispuestas a esperar.'},
+  };
+  return map[profile.id] || {title:'Decisor Reflexivo',desc:'Combinas análisis racional con intuición emocional para llegar a decisiones de alta calidad.'};
+}
+
+function getPotencial(profile, name){
+  const potenciales = {
+    arquitecto_estrategico:`La combinación de pensamiento sistémico y capacidad de ejecución que tienes es extremadamente escasa. En el mundo profesional, el 80% de las personas o pueden ver el sistema completo pero no ejecutar, o pueden ejecutar pero no ver el sistema. Tú puedes hacer las dos cosas — y eso te pone en el 20% superior de potencial en casi cualquier campo que elijas.`,
+    innovador_analitico:`Tu nivel de profundidad intelectual y tu capacidad de hacer preguntas que otros no hacen te posicionan para contribuciones que van más allá de lo incremental. Los avances reales — en ciencia, tecnología, política, teoría — los hacen personas con tu tipo de mente. El reto no es tu potencial; es aprender a comunicarlo y canalizarlo.`,
+    comunicador_visionario:`El talento de influir en cómo las personas piensan y sienten sobre algo — sin coerción y con autenticidad — es uno de los poderes más escasos y valiosos que existen. Con rigor intelectual y disciplina de ejecución, tu tipo de perfil puede llegar a audiencias de millones y dejar una huella cultural real.`,
+    lider_humanitario:`Los líderes que combinan inteligencia emocional alta con visión estratégica son los más necesitados y los más difíciles de encontrar. Tu potencial no está limitado al sector social — está en cualquier organización que necesite personas que puedan mover a equipos humanos hacia objetivos ambiciosos sin perder a las personas en el proceso.`,
+    creador_multidimensional:`Los creadores que pueden generar impacto cultural real — los que producen obras que cambian cómo las personas ven el mundo — tienen un tipo de mente que combina sensibilidad extrema con capacidad de síntesis original. Ese es exactamente tu perfil. Con disciplina y exposición, tu potencial creativo es de primer nivel.`,
+    emprendedor_disruptivo:`El mundo necesita urgentemente personas que puedan imaginar sistemas radicalmente distintos y luego tener la valentía de construirlos. Tu perfil combina las dos cosas — y eso es más raro de lo que parece. Con el equipo correcto y la disciplina de validar antes de escalar, tu potencial de impacto es enorme.`,
+    guardian_de_la_justicia:`Las personas que combinan convicción ética con inteligencia argumentativa y valentía para actuar son las que cambian sistemas. No solo los que se quejan de ellos — los que los transforman desde adentro o los desafían desde afuera con evidencia y persistencia. Ese es tu potencial real.`,
+    maestro_explorador:`Los educadores que encienden a otros con genuina pasión por el conocimiento tienen un multiplicador de impacto que pocos líderes poseen — porque cada persona que transformas lleva esa transformación a su entorno. Tu potencial no es solo educativo; es civilizatorio en el sentido más literal.`,
+    sanador_profundo:`Los clínicos, terapeutas y acompañantes que pueden sostener a alguien en sus momentos más oscuros con presencia genuina y habilidad técnica son de los profesionales más valiosos que existen. Tu perfil muestra que tienes la dotación natural para estar en ese grupo. Hay que cultivarla con formación, pero la base está.`,
+    constructor_de_sistemas:`Las organizaciones que funcionan — las que escalan sin colapsar, las que sobreviven a sus fundadores — lo hacen porque alguien con tu tipo de mente diseñó los sistemas que las sostienen. Tu potencial está en el núcleo de cómo funciona el mundo real, aunque rara vez reciba el crédito que merece.`,
+    explorador_digital:`Los profesionales técnicos que combinan profundidad de conocimiento con capacidad de visión estratégica son los que lideran las transformaciones tecnológicas más importantes. No solo los que construyen — los que deciden qué construir y por qué. Tu perfil muestra que puedes llegar a ese nivel.`,
+    puente_entre_mundos:`En un mundo que se fragmenta, las personas que pueden habitar múltiples mundos y conectarlos son indispensables. Tu potencial no es solo diplomático o comunicativo — es arquitectónico: puedes diseñar las estructuras que permiten que sistemas radicalmente distintos funcionen juntos.`,
+  };
+  return potenciales[profile.id] || `Tu perfil muestra un potencial multidimensional que puede traducirse en impacto significativo en múltiples campos profesionales. La clave es identificar el área donde tus fortalezas únicas generen mayor valor y enfocarte en desarrollarlas con profundidad.`;
+}
+
+function getEmoProfile(norm){
+  return [
+    {label:'Regulación emocional',val:norm.autoregulación||norm.control_emoc||55,color:'#9b6fff'},
+    {label:'Empatía cognitiva',val:norm.empatía||50,color:'#ff5780'},
+    {label:'Resiliencia',val:norm.resiliencia||norm.tolerancia_frustración||52,color:'#57ffe0'},
+    {label:'Estabilidad bajo presión',val:norm.tolerancia_estrés||48,color:'#4db8ff'},
+    {label:'Autoconciencia emocional',val:norm.autoconciencia_emoc||norm.autoconciencia||58,color:'#b8ff57'},
+    {label:'Motivación intrínseca',val:norm.motivación_interna||60,color:'#ffb830'},
+  ].map(i=>({...i, val: Math.min(95, Math.max(25, i.val || 45))}));
+}
+
+function getEmoAnalysis(profile, norm){
+  const analyses = {
+    arquitecto_estrategico:`Tu perfil emocional muestra una regulación sólida combinada con una motivación interna alta. Procesas las emociones de manera más cognitiva que visceral, lo que te da estabilidad pero a veces puede hacer que subestimes el impacto emocional de tus decisiones en los demás. Desarrollar mayor conexión con tus propias emociones en tiempo real — no solo en retrospectiva — amplificará tu capacidad de liderazgo.`,
+    lider_humanitario:`Tu perfil emocional está dominado por una empatía excepcional y una capacidad de conexión genuina. El riesgo principal es que esta misma apertura emocional te expone a absorber más de lo que puedes procesar. Construir rituales de descarga y límites sanos no es opcional para alguien con tu perfil — es lo que hace la diferencia entre sostener el impacto décadas o agotarte en años.`,
+    creador_multidimensional:`Tu mundo emocional es profundamente rico y complejo. Procesas la realidad de una manera que incluye dimensiones que la mayoría de personas no accede — lo que alimenta tu creatividad, pero también puede hacerte más vulnerable al caos interno cuando las emociones no tienen un canal de expresión. El arte no es solo lo que produces — es también tu sistema de regulación emocional más poderoso.`,
+  };
+  return analyses[profile.id] || `Tu perfil emocional muestra un equilibrio entre la capacidad de sentir profundamente y la habilidad de regular esas emociones de manera funcional. Continuar desarrollando la autoconciencia emocional — especialmente en situaciones de alta presión — es la inversión con mayor retorno para tu bienestar y efectividad a largo plazo.`;
+}
+
+function restart(){
+  answers={};dimScores={};currentModIdx=0;
+  showScreen('s-land');
+}
+</script>
+</body>
+</html>
